@@ -5,6 +5,7 @@ import { Provider } from 'react-redux'
 import { injectGlobal } from 'styled-components'
 import { store, browserHistory } from './store'
 import { Application } from './features/Application'
+import { colors } from './constants/colors'
 import 'core-js/es7'
 
 import 'normalize.css'
@@ -14,6 +15,10 @@ import 'semantic-ui-css/semantic.min.css'
 injectGlobal`
   * {
     box-sizing: border-box
+  }
+
+  body {
+    background-color: ${colors.background}
   }
 `
 
