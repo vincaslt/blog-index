@@ -1,22 +1,20 @@
 import * as React from 'react'
-import { Header, HeaderProps } from 'semantic-ui-react'
+import { Header, HeaderProps, Divider } from 'semantic-ui-react'
 import styled, { StyledComponentClass } from 'styled-components'
 
-const HR = styled.hr`
+const StyledHeader = styled(Header)`
+  margin-right: 15px !important;
+  margin-bottom: 0 !important;
+` as StyledComponentClass<HeaderProps, {}>
+
+const StyledDivider = styled(Divider)`
   width: 100%;
-  margin-left: 15px;
-  border: 0;
-  height: 0;
-  border-top: 1px solid rgba(0, 0, 0, 0.1);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.3);
 `
 
 const SectionTitle = ({ className, ...rest }: HeaderProps) => (
   <div className={className}>
-    <div>
-      <Header as="h4" {...rest} />
-    </div>
-    <HR />
+    <StyledHeader as="h4" {...rest} />
+    <StyledDivider />
   </div>
 )
 

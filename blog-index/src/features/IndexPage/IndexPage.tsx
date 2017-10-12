@@ -26,7 +26,7 @@ const IndexPage = ({ className }: { className: string }) => (
 )
 
 const StyledIndexPage = styled(IndexPage)`
-  margin-top: 30px;
+  margin-top: 6rem;
 `
 
 export { StyledIndexPage as IndexPage }
