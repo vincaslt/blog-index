@@ -1,9 +1,14 @@
 import * as React from 'react'
-import { Menu, Button, Input } from 'semantic-ui-react'
+import styled, { StyledComponentClass } from 'styled-components'
+import { Menu, MenuProps, Button, Input } from 'semantic-ui-react'
+
+const StyledMenu = styled(Menu)`
+  box-shadow: none !important;
+` as StyledComponentClass<MenuProps, {}>
 
 const Header = () => ( 
-  <Menu attached="top">
-    <Menu.Item name="Sign Up">
+  <StyledMenu fixed="top">
+    <Menu.Item header name="Sign Up">
       BlogIdx
     </Menu.Item>
     <Menu.Menu position="right">
@@ -14,7 +19,7 @@ const Header = () => (
         <Button primary>Sign Up</Button>
       </Menu.Item>
     </Menu.Menu>
-  </Menu>
+  </StyledMenu>
 )
 
 export { Header }
