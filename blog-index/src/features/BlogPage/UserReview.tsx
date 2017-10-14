@@ -29,7 +29,7 @@ const UserReview = ({ score = 3 }: Props) => (
         There is a very good content there. Some good content. All good content. Bla bla bla bla bla.
       </Item.Description>
       <Item.Extra>
-        <Button icon="thumbs up" compact basic circular/>
+        <Button icon="thumbs up outline" compact basic circular/>
         <span>121 rated the review useful</span>
       </Item.Extra>
     </Item.Content>
