@@ -1,4 +1,5 @@
 export const routeNames = {
   index: '/',
-  blog: '/blog'
+  blog: '/blog',
+  addBlog: '/new'
 }

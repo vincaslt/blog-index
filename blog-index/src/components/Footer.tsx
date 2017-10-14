@@ -4,8 +4,10 @@ import { Segment, SegmentProps, Container, Button, ButtonProps } from 'semantic-
 
 const FooterContainer = styled(Segment) `
   border: 0 !important;
-  margin-top: 4rem !important;
-  min-height: 6rem !important;
+  height: 6rem !important;
+  position: absolute !important;
+  top: auto !important;
+  bottom: 0;
 ` as StyledComponentClass<SegmentProps, {}>
 
 const Section = styled.div`

@@ -1,13 +1,12 @@
 import * as React from 'react'
 import { Header, Container } from 'semantic-ui-react'
-import styled from 'styled-components'
 import { BlogCard } from './BlogCard'
 import { SearchInput } from './SearchInput'
 import { ShowcaseSection } from './ShowcaseSection'
 
 
-const IndexPage = ({ className }: { className: string }) => (
-  <Container className={className}>
+const IndexPage = () => (
+  <div>
     <Container textAlign="center">
       <Header as="h1">What are you interested in?</Header>
       <SearchInput />
@@ -37,11 +36,7 @@ const IndexPage = ({ className }: { className: string }) => (
       <BlogCard />
       <BlogCard />
     </ShowcaseSection>
-  </Container>
+  </div>
 )
 
-const StyledIndexPage = styled(IndexPage)`
-  margin-top: 6rem;
-`
-
-export { StyledIndexPage as IndexPage }
+export { IndexPage }

@@ -18,7 +18,9 @@ const Header = () => (
         <Input className="icon" icon="search" placeholder="Search..." />
       </Menu.Item>
       <Menu.Item>
-        <Button color="teal" icon="compose" labelPosition="right" content="List a Blog" />
+        <Link to={routeNames.addBlog}>
+          <Button color="teal" icon="compose" labelPosition="right" content="List a Blog" />
+        </Link>
       </Menu.Item>
     </Menu.Menu>
   </StyledMenu>

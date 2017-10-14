@@ -14,11 +14,15 @@ import 'semantic-ui-css/semantic.min.css'
 // tslint:disable-next-line:no-unused-expression
 injectGlobal`
   * {
-    box-sizing: border-box
+    box-sizing: border-box;
   }
 
   body {
-    background-color: ${colors.background}
+    background-color: ${colors.background};
+  }
+
+  #root {
+    height: 100%;
   }
 `
 
