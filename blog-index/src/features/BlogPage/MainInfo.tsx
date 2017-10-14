@@ -1,6 +1,6 @@
 import * as React from 'react'
-import styled from 'styled-components'
-import { Segment, Image, Header, Rating, Label } from 'semantic-ui-react'
+import styled, { StyledComponentClass } from 'styled-components'
+import { Segment, Image, Header, HeaderProps, Rating, Label, Button, Popup } from 'semantic-ui-react'
 import * as image from './envato-bg.png'
 
 const Content = styled.div`
@@ -33,6 +33,17 @@ const Score = styled.h3`
   border-right: 1px solid rgba(0, 0, 0, 0.1);
 `
 
+const TitleContainer = styled.div`
+  display: flex;
+  margin-bottom: 1rem;
+  justify-content: space-between;
+`
+
+const Title = styled(Header)`
+  margin: 0 !important;
+  font-size: 2rem !important;
+` as StyledComponentClass<HeaderProps, {}>
+
 interface Props {
   className?: string
 }
@@ -45,7 +56,15 @@ const MainInfo = ({ className }: Props) => (
       size="large"
     />
     <Content>
-      <Header content="Envato Tuts+" as="h1" />
+      <TitleContainer>
+        <Title content="Envato Tuts+" as="a" href="https://tutsplus.com" target="_blank" />
+        <Popup
+          content="Open the blog"
+          trigger={<Button as="a" href="https://tutsplus.com" target="_blank" icon="external" circular basic />}
+          position="bottom center"
+          inverted
+        />
+      </TitleContainer>
       <ScoreSection>
         <Score>4.3</Score>
         <Rating maxRating={5} defaultRating={4.3} icon="star" size="massive" />
