@@ -8,7 +8,7 @@ const StyledMenu = styled(Menu)`
   box-shadow: none !important;
 ` as StyledComponentClass<MenuProps, {}>
 
-const Header = () => ( 
+const Header = () => (
   <StyledMenu fixed="top">
     <Menu.Item header>
       <Link to={routeNames.index}>Blog Seeker</Link>
