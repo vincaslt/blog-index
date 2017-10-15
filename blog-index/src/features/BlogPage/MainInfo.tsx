@@ -1,6 +1,8 @@
 import * as React from 'react'
 import styled, { StyledComponentClass } from 'styled-components'
-import { Segment, Image, Header, HeaderProps, Rating, Label, Button, Popup } from 'semantic-ui-react'
+import {
+  Segment, Image, Header, HeaderProps, Rating, Label, Button, Popup, Icon
+} from 'semantic-ui-react'
 import * as image from './envato-bg.png'
 
 const Content = styled.div`
@@ -27,7 +29,7 @@ const Labels = styled.div`
   align-items: center;
 `
 
-const Score = styled.h3`
+const Score = styled.h2`
   margin: 0 1rem 0 0;
   padding-right: 1rem;
   border-right: 1px solid rgba(0, 0, 0, 0.1);
@@ -43,6 +45,7 @@ const Title = styled(Header)`
   margin: 0 !important;
   font-size: 2rem !important;
 ` as StyledComponentClass<HeaderProps, {}>
+
 
 interface Props {
   className?: string
@@ -66,8 +69,14 @@ const MainInfo = ({ className }: Props) => (
         />
       </TitleContainer>
       <ScoreSection>
-        <Score>4.3</Score>
-        <Rating maxRating={5} defaultRating={4.3} icon="star" size="massive" />
+        <Icon color="yellow" size="big" name="star" />
+        <Score key="score">4.3</Score>
+        <Popup
+          content="Your score 5"
+          trigger={<Rating clearable key="rating" maxRating={5} defaultRating={4.3} icon="star" size="massive" />}
+          position="bottom center"
+          inverted
+        />
         <Labels>
           <Label color="violet">Tutorials</Label>
           <Label color="blue">Programming</Label>

@@ -1,20 +1,22 @@
 import * as React from 'react'
-import { withRouter, RouteComponentProps } from 'react-router'
+import { withRouter, RouteProps } from 'react-router'
 
-function scrollToTop<P>(Component: React.ComponentType<P>) {
-  type Props = RouteComponentProps<P>
+type Props = RouteProps
 
-  class ScrollToTop extends React.Component<Props, {}> {
-    componentDidMount() {
+class ScrollToTop extends React.Component<Props, {}> {
+  componentDidUpdate(prevProps: Props) {
+    const currentLocation = this.props.location && this.props.location.pathname
+    const previousLocation = prevProps.location && prevProps.location.pathname
+    if (currentLocation && currentLocation !== previousLocation) {
       window.scrollTo(0, 0)
-    }
-  
-    render() {
-      return <Component {...this.props} />
     }
   }
 
-  return withRouter(ScrollToTop)
+  render() {
+    return <div>{this.props.children}</div>
+  }
 }
 
-export { scrollToTop } 
+const DecoratedComponent = withRouter(ScrollToTop)
+
+export { DecoratedComponent as ScrollToTop } 

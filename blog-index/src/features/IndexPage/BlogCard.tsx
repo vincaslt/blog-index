@@ -16,7 +16,7 @@ const ScoreContainer = styled.span`
 `
 
 const BlogCard = () => (
-  <Card as={Link} to={routeNames.blog}>
+  <Card as={Link} to={routeNames.blog.url}>
     <Image src={blogImage} size="medium" />
     <Card.Content >
       <Card.Header>

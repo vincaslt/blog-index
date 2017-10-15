@@ -11,6 +11,10 @@ interface State {
 }
 
 class SearchInput extends React.Component<Props, State> {
+  state = {
+    searchText: ''
+  }
+
   handleClick = (e: React.SyntheticEvent<HTMLButtonElement>) => {
     this.props.onClick(this.state.searchText)
   }

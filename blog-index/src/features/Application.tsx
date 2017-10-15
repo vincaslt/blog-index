@@ -6,7 +6,7 @@ import { Container } from 'semantic-ui-react'
 import { routeNames } from '../constants/routeNames'
 import { Header } from '../components/Header'
 import { Footer } from '../components/Footer'
-import { scrollToTop } from '../components/ScrollToTop'
+import { ScrollToTop } from '../components/ScrollToTop'
 import { IndexPage } from './IndexPage'
 import { BlogPage } from './BlogPage'
 import { AddBlogPage } from './AddBlogPage'
@@ -21,17 +21,20 @@ const ContentContainer = styled(Container)`
   padding-bottom: 10rem;
 `
 
+
 const Application = () => {
   return (
     <AppContainer>
       <Header />
       <ContentContainer>
-        <Switch>
-          <Route exact path={routeNames.index.path} component={scrollToTop(IndexPage)} />
-          <Route exact path={routeNames.searchResults.path} component={scrollToTop(IndexPage)} />
-          <Route exact path={routeNames.addBlog.path} component={scrollToTop(AddBlogPage)} />
-          <Route exact path={routeNames.blog.path} component={scrollToTop(BlogPage)} />
-        </Switch>
+        <ScrollToTop>
+          <Switch>
+            <Route exact path={routeNames.index.path} component={IndexPage} />
+            <Route exact path={routeNames.searchResults.path} component={IndexPage} />
+            <Route exact path={routeNames.addBlog.path} component={AddBlogPage} />
+            <Route exact path={routeNames.blog.path} component={BlogPage} />
+          </Switch>
+        </ScrollToTop>
       </ContentContainer>
       <Footer />
     </AppContainer>

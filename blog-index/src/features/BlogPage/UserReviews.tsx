@@ -29,18 +29,18 @@ const UserReviews = ({ className }: Props) => (
       </Item.Group>
     </ReviewsContainer>
     <Menu attached pagination>
-      <Menu.Item name="1" active />
-      <Menu.Item name="2" />
-      <Menu.Item name="3" />
+      <Menu.Item as={Button} name="1" active />
+      <Menu.Item as={Button} name="2" />
+      <Menu.Item as={Button} name="3" />
       <Menu.Item disabled>...</Menu.Item>
-      <Menu.Item name="8" />
-      <Menu.Item name="9" />
-      <Menu.Item name="10" />
-      <Menu.Item name="11" />
-      <Menu.Item name="12" />
+      <Menu.Item as={Button} name="8" />
+      <Menu.Item as={Button} name="9" />
+      <Menu.Item as={Button} name="10" />
+      <Menu.Item as={Button} name="11" />
+      <Menu.Item as={Button} name="12" />
       <Menu.Menu position="right">
         <Menu.Item>
-          <Button icon="pencil" content="Write a review" />
+          <Button labelPosition="right" icon="pencil" content="Write a review" />
         </Menu.Item>
       </Menu.Menu>
     </Menu>
