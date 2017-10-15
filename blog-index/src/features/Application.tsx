@@ -1,11 +1,12 @@
 import * as React from 'react'
 import { withRouter, Route } from 'react-router-dom'
+import { Switch } from 'react-router'
 import styled from 'styled-components'
 import { Container } from 'semantic-ui-react'
 import { routeNames } from '../constants/routeNames'
 import { Header } from '../components/Header'
 import { Footer } from '../components/Footer'
-import { ScrollToTop } from '../components/ScrollToTop'
+import { scrollToTop } from '../components/ScrollToTop'
 import { IndexPage } from './IndexPage'
 import { BlogPage } from './BlogPage'
 import { AddBlogPage } from './AddBlogPage'
@@ -25,11 +26,12 @@ const Application = () => {
     <AppContainer>
       <Header />
       <ContentContainer>
-        <ScrollToTop>
-          <Route exact path={routeNames.index} component={IndexPage} />
-          <Route exact path={routeNames.addBlog} component={AddBlogPage} />
-          <Route exact path={routeNames.blog} component={BlogPage} />
-        </ScrollToTop>
+        <Switch>
+          <Route exact path={routeNames.index.path} component={scrollToTop(IndexPage)} />
+          <Route exact path={routeNames.searchResults.path} component={scrollToTop(IndexPage)} />
+          <Route exact path={routeNames.addBlog.path} component={scrollToTop(AddBlogPage)} />
+          <Route exact path={routeNames.blog.path} component={scrollToTop(BlogPage)} />
+        </Switch>
       </ContentContainer>
       <Footer />
     </AppContainer>
