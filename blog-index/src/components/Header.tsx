@@ -1,8 +1,9 @@
 import * as React from 'react'
 import { Link } from 'react-router-dom'
 import styled, { StyledComponentClass } from 'styled-components'
-import { Menu, MenuProps, Button, Input } from 'semantic-ui-react'
+import { Menu, MenuProps, Button } from 'semantic-ui-react'
 import { routeNames } from '../constants/routeNames'
+import { SearchInputContainer as SearchInput } from '../containers/SearchInputContainer'
 
 const StyledMenu = styled(Menu)`
   box-shadow: none !important;
@@ -15,7 +16,7 @@ const Header = () => (
     </Menu.Item>
     <Menu.Menu position="right">
       <Menu.Item>
-        <Input className="icon" icon="search" placeholder="Search..." />
+        <SearchInput secondary />
       </Menu.Item>
       <Menu.Item>
         <Link to={routeNames.addBlog.url}>

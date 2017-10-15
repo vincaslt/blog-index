@@ -1,36 +1,32 @@
 import * as React from 'react'
 import { Header, Container } from 'semantic-ui-react'
-import { connect } from 'react-redux'
+import styled from 'styled-components'
 import { Switch } from 'react-router'
-import { push } from 'connected-react-router'
 import { withRouter, RouteComponentProps, Route } from 'react-router'
 import { routeNames } from '../../constants/routeNames'
-import { SearchInput } from './SearchInput'
+import { SearchInputContainer as SearchInput } from '../../containers/SearchInputContainer'
 import { Showcase } from './Showcase'
 import { SearchResultsPage } from '../SearchResultsPage'
 
-
-interface DispatchProps {
-  push: typeof push
-}
+const StyledSearchInput = styled(SearchInput) `
+  max-width: 400px;
+  margin: 30px auto 125px auto;
+  width: 100%;
+`
 
 interface RouteProps {
   query?: string
 }
 
-type Props = DispatchProps & RouteComponentProps<RouteProps>
+type Props = RouteComponentProps<RouteProps>
 
 class IndexPage extends React.Component<Props, {}> {
-  handleSearch = (searchText: string) => {
-    this.props.push(`${routeNames.searchResults.url}/${searchText}`)
-  }
-
   render() {
     return (
       <div>
         <Container textAlign="center">
           <Header as="h1">What are you interested in?</Header>
-          <SearchInput onClick={this.handleSearch} />
+          <StyledSearchInput />
         </Container>
         <Switch>
           <Route exact path={routeNames.searchResults.path} component={SearchResultsPage} />
@@ -41,10 +37,7 @@ class IndexPage extends React.Component<Props, {}> {
   }
 }
 
-const mapDispatchToProps: DispatchProps = {
-  push
-}
 
-const ConnectedIndexPage = connect(null, mapDispatchToProps)(withRouter(IndexPage))
+const ConnectedIndexPage = withRouter(IndexPage)
 
 export { ConnectedIndexPage as IndexPage }
