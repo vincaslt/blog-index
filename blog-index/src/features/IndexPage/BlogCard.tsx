@@ -26,7 +26,8 @@ const BlogCard = () => (
         Tutorials, Programming, Multiple Authors
       </Card.Meta>
       <Card.Description>
-        Some very short tagline, taking at most eighty symbols taking up to two lines...
+        Some very short tagline taking at most one hundred
+        and fifteen text characters and taking up to three lines of text
       </Card.Description>
     </Card.Content>
     <Card.Content extra>

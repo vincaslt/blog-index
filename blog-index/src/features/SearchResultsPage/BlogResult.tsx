@@ -58,7 +58,7 @@ const BlogResult = () => (
   <Container>
     <Link to={routeNames.blog.url}>
       <BlogImage
-        label={{ as: 'span', color: 'white', content: 'New', ribbon: true }}
+        label={{ as: 'span', content: 'New', ribbon: true }}
         src={blogImage}
       />
     </Link>
@@ -75,12 +75,13 @@ const BlogResult = () => (
         <RatingPreview score={4.3} />
       </Heading>
       <Content>
-        Some very short tagline, taking at most eighty symbols taking up to two lines...
+        Some very short tagline taking at most one hundred
+        and fifteen text characters and taking up to three lines of text
       </Content>
       <Extras>
         <div>
           <Label icon="comments outline" detail="reviews" content="121" image basic />
-          <Label icon="comments" detail="comments" content="56" image basic />
+          <Label icon={{ name: 'comments', key: 'comments_icon' }} detail="comments" content="56" image basic />
         </div>
         <Label icon="checkmark" content="Verified" color="teal" basic />
       </Extras>

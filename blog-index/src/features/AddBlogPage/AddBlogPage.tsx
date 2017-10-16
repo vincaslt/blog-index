@@ -26,7 +26,7 @@ const AddBlogPage = () => (
         <Form.Input label="Link" placeholder="http://..." icon="linkify" iconPosition="left" />
         <Form.Dropdown label="Tags" placeholder="Tags" fluid multiple search selection options={tagOptions} />
       </Form.Group>
-      <Form.Input label="Tagline" maxLength={80} placeholder="Short Description" icon="pencil" iconPosition="left" />
+      <Form.Input label="Tagline" maxLength={115} placeholder="Short Description" icon="pencil" iconPosition="left" />
       <Form.TextArea label="Description" placeholder="What is the blog about?" />
       <Form.Button primary>Submit</Form.Button>
     </Form>
