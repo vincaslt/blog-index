@@ -10,7 +10,7 @@ import { SearchResultsPage } from '../SearchResultsPage'
 
 const StyledSearchInput = styled(SearchInput) `
   max-width: 400px;
-  margin: 30px auto 125px auto;
+  margin: 3rem auto;
   width: 100%;
 `
 

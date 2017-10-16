@@ -17,7 +17,7 @@ const AppContainer = styled.div`
 `
 
 const ContentContainer = styled(Container)`
-  padding-top: 6rem;
+  padding-top: 7.5rem;
   padding-bottom: 10rem;
 `
 

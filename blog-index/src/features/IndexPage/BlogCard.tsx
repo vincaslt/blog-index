@@ -1,7 +1,8 @@
 import * as React from 'react'
 import styled from 'styled-components'
-import { Card, Image, Rating, Label } from 'semantic-ui-react'
+import { Card, Image, Label } from 'semantic-ui-react'
 import { Link } from 'react-router-dom'
+import { RatingPreview } from '../../components/RatingPreview'
 import { routeNames } from '../../constants/routeNames'
 import * as blogImage from './envato-bg.png'
 
@@ -10,10 +11,6 @@ const SpacedContent = styled.div`
   justify-content: space-between;
 `
 
-const ScoreContainer = styled.span`
-  display: flex;
-  align-items: center;
-`
 
 const BlogCard = () => (
   <Card as={Link} to={routeNames.blog.url}>
@@ -22,10 +19,7 @@ const BlogCard = () => (
       <Card.Header>
         <SpacedContent>
           Envato Tuts+
-          <ScoreContainer>
-            <Rating rating={4.3} maxRating={5} disabled />
-            <Label circular basic>4.3</Label>
-          </ScoreContainer>
+          <RatingPreview score={4.3} />
         </SpacedContent>
       </Card.Header>
       <Card.Meta>

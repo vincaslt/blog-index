@@ -51,6 +51,7 @@ interface Props {
   className?: string
 }
 
+// TODO: formalize, that image size is 1024x720 (720p)
 const MainInfo = ({ className }: Props) => (
   <Segment className={className} attached>
     <Image

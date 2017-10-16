@@ -23,9 +23,10 @@ const AddBlogPage = () => (
         <Form.Input type="file" label="Image" />
       </Form.Group>
       <Form.Group widths="equal">
-        <Form.Input label="Link" placeholder="Link" icon="linkify" iconPosition="left" />
+        <Form.Input label="Link" placeholder="http://..." icon="linkify" iconPosition="left" />
         <Form.Dropdown label="Tags" placeholder="Tags" fluid multiple search selection options={tagOptions} />
       </Form.Group>
+      <Form.Input label="Tagline" maxLength={80} placeholder="Short Description" icon="pencil" iconPosition="left" />
       <Form.TextArea label="Description" placeholder="What is the blog about?" />
       <Form.Button primary>Submit</Form.Button>
     </Form>
