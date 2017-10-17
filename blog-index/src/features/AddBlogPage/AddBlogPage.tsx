@@ -36,16 +36,17 @@ const AddBlogPage = () => (
       <Form.Group>
         <Form.Field
           label="Photo"
+          required
           control={() => <StyledDropzone placeholder="Drop or click" />}
           multiple={false}
         />
         <MainFormContainer>
           <Form.Group widths="equal">
-            <Form.Input label="Title" placeholder="Title" />
-            <Form.Select label="Category" options={options} placeholder="Category" />
+            <Form.Input label="Title" required placeholder="Title" />
+            <Form.Select label="Category" required options={options} placeholder="Category" />
           </Form.Group>
           <Form.Group widths="equal">
-            <Form.Input label="Link" placeholder="http://..." icon="linkify" iconPosition="left" />
+            <Form.Input label="Link" required placeholder="http://..." icon="linkify" iconPosition="left" />
             <Form.Dropdown label="Tags" placeholder="Tags" fluid multiple search selection options={tagOptions} />
           </Form.Group>
           <Form.Input
@@ -57,8 +58,8 @@ const AddBlogPage = () => (
           />
         </MainFormContainer>
       </Form.Group>
-      <Form.TextArea label="Description" placeholder="What is the blog about?" />
-      <Form.Button primary>Submit</Form.Button>
+      <Form.TextArea required label="Description" placeholder="What is the blog about?" />
+      <Form.Button labelPosition="left" icon="checkmark" primary content="Submit" />
     </Form>
   </div>
 )

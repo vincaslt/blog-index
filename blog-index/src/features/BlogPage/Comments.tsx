@@ -23,7 +23,8 @@ const Comments = ({ className }: Props) => (
       </Comment>
     </CommentItem.Group>
     <Form>
-      <Form.TextArea width="10" />
+      <Form.Input placeholder="Name" required width="6" />
+      <Form.TextArea placeholder="Comment" required width="10" />
       <Button content="Comment" labelPosition="left" icon="edit" primary />
     </Form>
   </div>

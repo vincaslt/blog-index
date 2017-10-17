@@ -14,6 +14,12 @@ const StyledSearchInput = styled(SearchInput) `
   width: 100%;
 `
 
+const MainContentContainer = styled.div`
+  max-width: 960px;
+  margin-left: auto;
+  margin-right: auto;
+`
+
 interface RouteProps {
   query?: string
 }
@@ -28,10 +34,12 @@ class IndexPage extends React.Component<Props, {}> {
           <Header as="h1">What are you interested in?</Header>
           <StyledSearchInput />
         </Container>
-        <Switch>
-          <Route exact path={routeNames.searchResults.path} component={SearchResultsPage} />
-          <Route exact path={routeNames.index.path} component={Showcase} />
-        </Switch>
+        <MainContentContainer>
+          <Switch>
+            <Route exact path={routeNames.searchResults.path} component={SearchResultsPage} />
+            <Route exact path={routeNames.index.path} component={Showcase} />
+          </Switch>
+        </MainContentContainer>
       </div>
     )
   }

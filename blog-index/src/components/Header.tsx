@@ -20,7 +20,7 @@ const Header = () => (
       </Menu.Item>
       <Menu.Item>
         <Link to={routeNames.addBlog.url}>
-          <Button color="teal" icon="compose" labelPosition="right" content="List a Blog" />
+          <Button color="teal" icon="add" labelPosition="right" content="List a Blog" />
         </Link>
       </Menu.Item>
     </Menu.Menu>
