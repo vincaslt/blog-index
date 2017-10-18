@@ -2,6 +2,7 @@ import {
   JsonController,
   Get
 } from 'routing-controllers'
+import {  } from 'typeorm'
 
 @JsonController()
 export class TestController {
