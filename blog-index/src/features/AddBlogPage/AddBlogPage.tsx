@@ -1,7 +1,9 @@
 import * as React from 'react'
 import styled from 'styled-components'
 import { Form } from 'semantic-ui-react'
-import { Field, reduxForm } from 'redux-form'
+import { Field, reduxForm, FormProps } from 'redux-form'
+import { connect } from 'react-redux'
+import { FormData, actions } from '../../modules/addBlogForm'
 import { ImageDropzone } from '../../components/ImageDropzone'
 import { FormDropdown } from '../../components/FormControls/FormDropdown'
 import { FormTextArea } from '../../components/FormControls/FormTextArea'
@@ -35,10 +37,22 @@ const MainFormContainer = styled.div`
   padding: 0 0.5rem;
 `
 
-class AddBlogPage extends React.Component {
+type Props = {
+  submit: typeof actions.submit
+} & FormProps<FormData, {}, {}>
+
+class AddBlogPage extends React.Component<Props, {}> {
+  onSubmit = (data: FormData) => {
+    this.props.submit(data)
+  }
+
   render() {
+    if (!this.props.handleSubmit) {
+      return 'No handler present'
+    }
+
     return (
-      <Form>
+      <Form onSubmit={this.props.handleSubmit(this.onSubmit)}>
         <Form.Group>
           <Field
             name="photo"
@@ -107,9 +121,16 @@ class AddBlogPage extends React.Component {
   }
 }
 
+const mapDispatchToProps = {
+  submit: actions.submit
+}
+
 // TODO: separate form component and partials
 const ConnectedAddBlogPage = reduxForm({
-  form: 'addBlog'
-})(AddBlogPage)
+  form: 'addBlog',
+  initialValues: {
+    tags: []
+  } as Partial<FormData>
+})(connect(null, mapDispatchToProps)(AddBlogPage))
 
 export { ConnectedAddBlogPage as AddBlogPage }
