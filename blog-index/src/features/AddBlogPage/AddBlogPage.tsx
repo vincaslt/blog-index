@@ -1,7 +1,12 @@
 import * as React from 'react'
 import styled from 'styled-components'
 import { Form } from 'semantic-ui-react'
+import { Field, reduxForm } from 'redux-form'
 import { ImageDropzone } from '../../components/ImageDropzone'
+import { FormDropdown } from './FormDropdown'
+import { FormTextArea } from './FormTextArea'
+import { FormSelect } from './FormSelect'
+import { FormFile } from './FormFile'
 
 const options = [
   { key: 'ls', text: 'Lifestyle', value: 'lifestyle' },
@@ -31,37 +36,76 @@ const MainFormContainer = styled.div`
 `
 
 const AddBlogPage = () => (
-  <div>
-    <Form>
-      <Form.Group>
-        <Form.Field
-          label="Photo"
-          required
-          control={() => <StyledDropzone placeholder="Drop or click" />}
-          multiple={false}
-        />
-        <MainFormContainer>
-          <Form.Group widths="equal">
-            <Form.Input label="Title" required placeholder="Title" />
-            <Form.Select label="Category" required options={options} placeholder="Category" />
-          </Form.Group>
-          <Form.Group widths="equal">
-            <Form.Input label="Link" required placeholder="http://..." icon="linkify" iconPosition="left" />
-            <Form.Dropdown label="Tags" placeholder="Tags" fluid multiple search selection options={tagOptions} />
-          </Form.Group>
-          <Form.Input
-            label="Tagline"
-            maxLength={115}
-            placeholder="Short Description"
-            icon="pencil"
+  <Form>
+    <Form.Group>
+      <Field
+        name="photo"
+        component={FormFile}
+        label="Photo"
+        required
+        control={StyledDropzone}
+        controlProps={{ placeholder: 'Drop or click' }}
+        multiple={false}
+      />
+      <MainFormContainer>
+        <Form.Group widths="equal">
+          <Field component={Form.Input} name="title" label="Title" required placeholder="Title" />
+          <Field
+            component={FormSelect}
+            name="category"
+            label="Category"
+            required
+            options={options}
+            placeholder="Category"
+          />
+        </Form.Group>
+        <Form.Group widths="equal">
+          <Field
+            component={Form.Input}
+            name="link"
+            label="Link"
+            required
+            placeholder="http://..."
+            icon="linkify"
             iconPosition="left"
           />
-        </MainFormContainer>
-      </Form.Group>
-      <Form.TextArea required label="Description" placeholder="What is the blog about?" />
-      <Form.Button labelPosition="left" icon="checkmark" primary content="Submit" />
-    </Form>
-  </div>
+          <Field
+            component={FormDropdown}
+            name="tags"
+            label="Tags"
+            placeholder="Tags"
+            fluid
+            multiple
+            search
+            selection
+            options={tagOptions}
+          />
+        </Form.Group>
+        <Field
+          component={Form.Input}
+          name="tagline"
+          label="Tagline"
+          maxLength={115}
+          placeholder="Short Description"
+          icon="pencil"
+          iconPosition="left"
+        />
+      </MainFormContainer>
+    </Form.Group>
+    <Field
+      component={FormTextArea}
+      name="description"
+      required
+      label="Description"
+      placeholder="What is the blog about?"
+    />
+    <Form.Button labelPosition="left" icon="checkmark" primary content="Submit" />
+  </Form>
 )
 
-export { AddBlogPage }
+// TODO: separate form component and partials
+const ConnectedAddBlogPage = reduxForm({
+  form: 'addBlog'
+})(AddBlogPage)
+
+export { ConnectedAddBlogPage as AddBlogPage }
