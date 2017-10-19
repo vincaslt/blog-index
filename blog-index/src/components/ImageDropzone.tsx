@@ -3,7 +3,8 @@ import Dropzone, { DropzoneProps, ImageFile } from 'react-dropzone'
 import { Image } from 'semantic-ui-react'
 
 interface OwnProps {
-  onChange?: (image: ImageFile) => void
+  value?: ImageFile
+  onSelect?: (image: ImageFile) => void
   placeholder?: React.ReactNode
 }
 type Props = OwnProps & DropzoneProps
@@ -19,14 +20,17 @@ class ImageDropzone extends React.Component<Props, State> {
 
   handleChange = ([image]: ImageFile[]) => {
     this.setState({ image })
-    if (this.props.onChange) {
-      this.props.onChange(image)
+    if (this.props.onSelect) {
+      this.props.onSelect(image)
     }
   }
 
   renderImage = () => {
-    if (this.state.image) {
-      return <Image centered src={this.state.image.preview} />
+    const imageSrc = this.props.value ? this.props.value.preview : undefined
+    const localImage = this.state.image ? this.state.image.preview : undefined
+    const image = imageSrc || localImage
+    if (image) {
+      return <Image centered src={image} />
     }
     return this.props.placeholder
   }
@@ -44,4 +48,4 @@ class ImageDropzone extends React.Component<Props, State> {
   }
 }
 
-export { ImageDropzone }
+export { ImageDropzone, ImageFile }

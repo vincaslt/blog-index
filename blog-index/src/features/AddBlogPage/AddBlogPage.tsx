@@ -3,10 +3,10 @@ import styled from 'styled-components'
 import { Form } from 'semantic-ui-react'
 import { Field, reduxForm } from 'redux-form'
 import { ImageDropzone } from '../../components/ImageDropzone'
-import { FormDropdown } from './FormDropdown'
-import { FormTextArea } from './FormTextArea'
-import { FormSelect } from './FormSelect'
-import { FormFile } from './FormFile'
+import { FormDropdown } from '../../components/FormControls/FormDropdown'
+import { FormTextArea } from '../../components/FormControls/FormTextArea'
+import { FormSelect } from '../../components/FormControls/FormSelect'
+import { FormPhoto } from '../../components/FormControls/FormPhoto'
 
 const options = [
   { key: 'ls', text: 'Lifestyle', value: 'lifestyle' },
@@ -35,73 +35,77 @@ const MainFormContainer = styled.div`
   padding: 0 0.5rem;
 `
 
-const AddBlogPage = () => (
-  <Form>
-    <Form.Group>
-      <Field
-        name="photo"
-        component={FormFile}
-        label="Photo"
-        required
-        control={StyledDropzone}
-        controlProps={{ placeholder: 'Drop or click' }}
-        multiple={false}
-      />
-      <MainFormContainer>
-        <Form.Group widths="equal">
-          <Field component={Form.Input} name="title" label="Title" required placeholder="Title" />
+class AddBlogPage extends React.Component {
+  render() {
+    return (
+      <Form>
+        <Form.Group>
           <Field
-            component={FormSelect}
-            name="category"
-            label="Category"
+            name="photo"
+            component={FormPhoto}
+            control={StyledDropzone}
+            controlProps={{ placeholder: 'Drop or click' }}
+            label="Photo"
             required
-            options={options}
-            placeholder="Category"
+            multiple={false}
           />
-        </Form.Group>
-        <Form.Group widths="equal">
-          <Field
-            component={Form.Input}
-            name="link"
-            label="Link"
-            required
-            placeholder="http://..."
-            icon="linkify"
-            iconPosition="left"
-          />
-          <Field
-            component={FormDropdown}
-            name="tags"
-            label="Tags"
-            placeholder="Tags"
-            fluid
-            multiple
-            search
-            selection
-            options={tagOptions}
-          />
+          <MainFormContainer>
+            <Form.Group widths="equal">
+              <Field component={Form.Input} name="title" label="Title" required placeholder="Title" />
+              <Field
+                component={FormSelect}
+                name="category"
+                label="Category"
+                required
+                options={options}
+                placeholder="Category"
+              />
+            </Form.Group>
+            <Form.Group widths="equal">
+              <Field
+                component={Form.Input}
+                name="link"
+                label="Link"
+                required
+                placeholder="http://..."
+                icon="linkify"
+                iconPosition="left"
+              />
+              <Field
+                component={FormDropdown}
+                name="tags"
+                label="Tags"
+                placeholder="Tags"
+                fluid
+                multiple
+                search
+                selection
+                options={tagOptions}
+              />
+            </Form.Group>
+            <Field
+              component={Form.Input}
+              name="tagline"
+              label="Tagline"
+              maxLength={115}
+              placeholder="Short Description"
+              icon="pencil"
+              iconPosition="left"
+            />
+          </MainFormContainer>
         </Form.Group>
         <Field
-          component={Form.Input}
-          name="tagline"
-          label="Tagline"
-          maxLength={115}
-          placeholder="Short Description"
-          icon="pencil"
-          iconPosition="left"
+          component={FormTextArea}
+          name="description"
+          required
+          label="Description"
+          placeholder="What is the blog about?"
         />
-      </MainFormContainer>
-    </Form.Group>
-    <Field
-      component={FormTextArea}
-      name="description"
-      required
-      label="Description"
-      placeholder="What is the blog about?"
-    />
-    <Form.Button labelPosition="left" icon="checkmark" primary content="Submit" />
-  </Form>
-)
+        <Form.Button labelPosition="left" icon="checkmark" primary content="Submit" />
+      </Form>
+    )
+  }
+}
 
 // TODO: separate form component and partials
 const ConnectedAddBlogPage = reduxForm({
