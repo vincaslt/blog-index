@@ -1,1 +1,1 @@
-export { TestController } from './TestController'
+export { BlogController } from './BlogController'
