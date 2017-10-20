@@ -6,8 +6,8 @@ export interface FormData {
   title: string
   category: string
   link: string
-  tags: string[]
-  tagline: string
+  tags?: string[]
+  tagline?: string
   description: string
 }
 

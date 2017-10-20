@@ -1,6 +1,12 @@
 import * as React from 'react'
+import styled, { StyledComponentClass } from 'styled-components'
 import Dropzone, { DropzoneProps, ImageFile } from 'react-dropzone'
-import { Image } from 'semantic-ui-react'
+import { Image, ImageProps } from 'semantic-ui-react'
+
+const StyledImage = styled(Image)`
+  max-height: 100%;
+  max-width: 100%;
+` as StyledComponentClass<ImageProps, {}>
 
 interface OwnProps {
   value?: ImageFile
@@ -30,7 +36,7 @@ class ImageDropzone extends React.Component<Props, State> {
     const localImage = this.state.image ? this.state.image.preview : undefined
     const image = imageSrc || localImage
     if (image) {
-      return <Image centered src={image} />
+      return <StyledImage centered src={image} />
     }
     return this.props.placeholder
   }

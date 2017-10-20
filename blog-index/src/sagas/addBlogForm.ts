@@ -4,7 +4,6 @@ import { addBlog } from '../api/blog'
 import { types, FormData } from '../modules/addBlogForm'
 
 function* addBlogFormSubmitSaga(action: Action<FormData>) {
-  console.log('jop')
   if (action.payload) {
     try {
       yield call(addBlog, action.payload)

@@ -16,11 +16,11 @@ export class BlogEntity {
   @Column()
   public link: string
   
-  @Column('simple-array')
-  public tags: string[]
+  @Column({ type: 'simple-array', nullable: true })
+  public tags?: string[]
   
-  @Column()
-  public tagline: string
+  @Column({ nullable: true })
+  public tagline?: string
   
   @Column()
   public description: string
