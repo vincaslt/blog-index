@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import { Form } from 'semantic-ui-react'
 import { Field, reduxForm, FormProps } from 'redux-form'
 import { connect } from 'react-redux'
-import { FormData, actions } from '../../modules/addBlogForm'
+import { models as m, actions } from '../../modules/addBlogForm'
 import { ImageDropzone } from '../../components/ImageDropzone'
 import { FormDropdown } from '../../components/FormControls/FormDropdown'
 import { FormTextArea } from '../../components/FormControls/FormTextArea'
@@ -39,10 +39,10 @@ const MainFormContainer = styled.div`
 
 type Props = {
   submit: typeof actions.submit
-} & FormProps<FormData, {}, {}>
+} & FormProps<m.FormModel, {}, {}>
 
 class AddBlogPage extends React.Component<Props, {}> {
-  onSubmit = (data: FormData) => {
+  onSubmit = (data: m.FormModel) => {
     this.props.submit(data)
   }
 
@@ -130,7 +130,7 @@ const ConnectedAddBlogPage = reduxForm({
   form: 'addBlog',
   initialValues: {
     tags: []
-  } as Partial<FormData>
+  } as Partial<m.FormModel>
 })(connect(null, mapDispatchToProps)(AddBlogPage))
 
 export { ConnectedAddBlogPage as AddBlogPage }

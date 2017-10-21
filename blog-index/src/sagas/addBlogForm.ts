@@ -1,16 +1,13 @@
-import { Action } from 'redux-actions'
 import { takeLatest, call } from 'redux-saga/effects'
-import { addBlog } from '../api/blog'
-import { types, FormData } from '../modules/addBlogForm'
+import * as api from '../api/blog'
+import { models as m } from '../modules/addBlogForm'
 
-function* addBlogFormSubmitSaga(action: Action<FormData>) {
-  if (action.payload) {
-    try {
-      yield call(addBlog, action.payload)
-    } catch (e) { /* TODO: handle error */}
-  }
+function* addBlogFormSubmitSaga(action: m.SubmitAction) {
+  try {
+    yield call(api.addBlog, action.formData)
+  } catch (e) { /* TODO: handle error */}
 }
 
-export const addBlogForm = [
-  takeLatest(types.ADD_BLOG_FORM_SUBMIT, addBlogFormSubmitSaga)
+export const addBlogFormSagas = [
+  takeLatest(m.types.ADD_BLOG_FORM_SUBMIT, addBlogFormSubmitSaga)
 ]
