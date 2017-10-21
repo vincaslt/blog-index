@@ -1,8 +1,9 @@
 import * as React from 'react'
 import styled, { StyledComponentClass } from 'styled-components'
 import {
-  Segment, Image, Header, HeaderProps, Rating, Label, Button, Popup, Icon
+  Segment, Image, Header, HeaderProps, Rating, Button, Popup, Icon
 } from 'semantic-ui-react'
+import { Tags } from './Tags'
 import * as image from './envato-bg.png'
 
 const Content = styled.div`
@@ -18,14 +19,6 @@ const ScoreSection = styled.div`
   padding: 1rem;
   display: flex;
   margin-bottom: 1rem;
-  align-items: center;
-`
-
-const Labels = styled.div`
-  border-left: 1px solid rgba(0, 0, 0, 0.1);
-  margin-left: 1rem;
-  padding-left: 1rem;
-  display: flex;
   align-items: center;
 `
 
@@ -49,10 +42,11 @@ const Title = styled(Header)`
 
 interface Props {
   className?: string
+  tags?: string[]
 }
 
 // TODO: formalize, that image size is 1024x720 (720p)
-const MainInfo = ({ className }: Props) => (
+const BlogInformation = ({ className, tags = [] }: Props) => (
   <Segment className={className} attached>
     <Image
       label={{ as: 'span', color: 'yellow', content: 'Featured', icon: 'empty star', ribbon: true }}
@@ -78,11 +72,7 @@ const MainInfo = ({ className }: Props) => (
           position="bottom center"
           inverted
         />
-        <Labels>
-          <Label color="violet">Tutorials</Label>
-          <Label color="blue">Programming</Label>
-          <Label color="teal">Multiple Authors</Label>
-        </Labels>
+        <Tags labels={tags} />
       </ScoreSection>
       <div>
         Today Envato Tuts+ is a leading publisher of online tutorials and courses for self-directed
@@ -94,10 +84,10 @@ const MainInfo = ({ className }: Props) => (
   </Segment>
 )
 
-const StyledMainInfo = styled(MainInfo) `
+const StyledBlogInformation = styled(BlogInformation) `
   display: flex !important;
   min-height: 210px;
   padding: 0 !important;
 `
 
-export { StyledMainInfo as MainInfo }
+export { StyledBlogInformation as BlogInformation }

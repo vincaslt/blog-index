@@ -12,14 +12,14 @@ const StyledMenu = styled(Menu)`
 const Header = () => (
   <StyledMenu fixed="top">
     <Menu.Item header>
-      <Link to={routeNames.index.url}>Blog Seeker</Link>
+      <Link to={routeNames.index.url()}>Blog Seeker</Link>
     </Menu.Item>
     <Menu.Menu position="right">
       <Menu.Item>
         <SearchInput secondary />
       </Menu.Item>
       <Menu.Item>
-        <Link to={routeNames.addBlog.url}>
+        <Link to={routeNames.addBlog.url()}>
           <Button color="teal" icon="add" labelPosition="right" content="List a Blog" />
         </Link>
       </Menu.Item>

@@ -13,7 +13,7 @@ type Props = SearchInputProps & DispatchProps
 
 class SearchInputContainer extends React.Component<Props> {
   handleSearch = (searchText: string) => {
-    this.props.push(`${routeNames.searchResults.url}/${searchText}`)
+    this.props.push(routeNames.searchResults.url(searchText))
   }
 
   render() {

@@ -13,7 +13,7 @@ const SpacedContent = styled.div`
 
 
 const BlogCard = () => (
-  <Card as={Link} to={routeNames.blog.url}>
+  <Card as={Link} to={routeNames.blog.url(10)}>
     <Image src={blogImage} size="medium" />
     <Card.Content >
       <Card.Header>

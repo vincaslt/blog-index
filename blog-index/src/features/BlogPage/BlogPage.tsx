@@ -1,11 +1,11 @@
 import * as React from 'react'
-import { MainInfo } from './MainInfo'
+import { BlogInformation } from '../../components/BlogInformation'
 import { UserReviews } from './UserReviews'
 import { Comments } from './Comments'
 
 const BlogPage = () => (
   <div>
-    <MainInfo />
+    <BlogInformation tags={['Tutorials', 'Programming', 'Multiple Authors']} />
     <UserReviews />
     <Comments />
   </div>

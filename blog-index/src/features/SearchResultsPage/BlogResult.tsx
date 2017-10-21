@@ -56,7 +56,7 @@ const BlogImage = styled(Image)`
 
 const BlogResult = () => (
   <Container>
-    <Link to={routeNames.blog.url}>
+    <Link to={routeNames.blog.url(10)}>
       <BlogImage
         label={{ as: 'span', content: 'New', ribbon: true }}
         src={blogImage}
@@ -65,7 +65,7 @@ const BlogResult = () => (
     <ContentContainer>
       <Heading>
         <Title as="h3">
-          <Link to={routeNames.blog.url}>
+          <Link to={routeNames.blog.url(10)}>
             Envato Tuts+
           </Link>
           <Header.Subheader>
