@@ -3,7 +3,9 @@ import {
   BadRequestError,
   UseBefore,
   Post,
-  Req
+  Req,
+  Get,
+  Param
 } from 'routing-controllers'
 import { BlogService } from '../services/BlogService'
 import { Request } from 'express'
@@ -12,8 +14,9 @@ import { BlogEntity } from '../entities/BlogEntity'
 import { PhotoEntity } from '../entities/PhotoEntity'
 import { logger } from '../utils/logger'
 import { FormFieldsDto } from '../dto/FormFieldsDto'
+import { config } from '../config'
 
-const upload = multer({ dest: `_blog-images/` })
+const upload = multer({ dest: config.PHOTO_DEST })
 
 interface FormRequest<Fields> extends Request {
   body: Fields
@@ -46,6 +49,20 @@ export class BlogController {
       logger.error(e)
       throw new BadRequestError('Blog could not be added')
     }
+  }
+
+  @Get('/blog/:id')
+  public async blog( @Param('id') id: number) {
+    try {
+      const blog = await BlogService.getBlog(id)
+      if (blog) {
+        return blog
+      }
+    } catch (e) {
+      logger.error(e)
+      throw new BadRequestError('Blog could not be received')
+    }
+    throw new BadRequestError(`No blog found with id ${id}`)
   }
 
 }
