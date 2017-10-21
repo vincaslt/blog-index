@@ -9,9 +9,9 @@ export interface BlogInformation {
   title: string
   category: string
   link: string
+  description: string
   tags?: string[]
   tagline?: string
-  description: string
 }
 
 export interface RequestInformationAction {

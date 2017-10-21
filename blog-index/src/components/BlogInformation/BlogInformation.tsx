@@ -1,10 +1,10 @@
 import * as React from 'react'
 import styled, { StyledComponentClass } from 'styled-components'
 import {
-  Segment, Image, Header, HeaderProps, Rating, Button, Popup, Icon
+  Segment, Image, Header, HeaderProps, Button, Icon, Popup
 } from 'semantic-ui-react'
+import { RatingInput } from '../RatingInput'
 import { Tags } from './Tags'
-import * as image from './envato-bg.png'
 
 const Content = styled.div`
   padding: 1.5rem;
@@ -40,46 +40,50 @@ const Title = styled(Header)`
 ` as StyledComponentClass<HeaderProps, {}>
 
 
-interface Props {
-  className?: string
+export interface Props {
+  title: string
+  image: string
+  rating: number
+  link: string
+  description: string
   tags?: string[]
+  className?: string
 }
 
+// TODO: connected rating
 // TODO: formalize, that image size is 1024x720 (720p)
-const BlogInformation = ({ className, tags = [] }: Props) => (
+const BlogInformation = ({
+  image,
+  title,
+  rating,
+  description,
+  link,
+  tags = [],
+  className
+}: Props) => (
   <Segment className={className} attached>
     <Image
       label={{ as: 'span', color: 'yellow', content: 'Featured', icon: 'empty star', ribbon: true }}
-      src={image}
+      src={`data:image/png;base64,${image}`}
       size="large"
     />
     <Content>
       <TitleContainer>
-        <Title content="Envato Tuts+" as="a" href="https://tutsplus.com" target="_blank" />
+        <Title content={title} as="a" href="https://tutsplus.com" target="_blank" />
         <Popup
           content="Open the blog"
-          trigger={<Button as="a" href="https://tutsplus.com" target="_blank" icon="external" circular basic />}
+          trigger={<Button as="a" href={link} target="_blank" icon="external" circular basic />}
           position="bottom center"
           inverted
         />
       </TitleContainer>
       <ScoreSection>
         <Icon color="yellow" size="big" name="star" />
-        <Score key="score">4.3</Score>
-        <Popup
-          content="Your score 5"
-          trigger={<Rating clearable key="rating" maxRating={5} defaultRating={4.3} icon="star" size="massive" />}
-          position="bottom center"
-          inverted
-        />
+        <Score key="score">{rating}</Score>
+        <RatingInput initialRating={rating} />
         <Tags labels={tags} />
       </ScoreSection>
-      <div>
-        Today Envato Tuts+ is a leading publisher of online tutorials and courses for self-directed
-        learners to develop creative skills. Envato Tuts+ is part of Envato, a privately owned
-        Australian company that operates an ecosystem of creative websites with a global community.
-        We’re passionate about the web and enabling creators to make a living doing what they love.
-      </div>
+      <div>{description}</div>
     </Content>
   </Segment>
 )

@@ -1,1 +1,1 @@
-export { BlogInformation } from './BlogInformation'
+export { BlogInformation, Props } from './BlogInformation'
