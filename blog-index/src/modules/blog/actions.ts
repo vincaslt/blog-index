@@ -5,3 +5,9 @@ export const requestInformation =
     type: m.types.REQUEST_INFORMATION,
     id
   })
+
+export const receiveInformation =
+  (blog: m.BlogInformation): m.ReceiveInformationAction => ({
+    type: m.types.RECEIVE_INFORMATION,
+    blog
+  })

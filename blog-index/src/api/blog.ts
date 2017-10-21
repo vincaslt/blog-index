@@ -11,16 +11,10 @@ export function addBlog(data: m.FormModel) {
   const formData = new FormData()
   Object.entries(data).forEach(([k, v]) => formData.append(k, v))
   return axios.post('/blog', formData)
+    .then(({ data }) => data)
 }
 
 export function getBlogInformation(id: number) {
-  return Promise.resolve({
-    title: 'asd',
-    category: 'asd',
-    link: 'asd',
-    tags: ['asd'],
-    tagline: 'asd',
-    description: 'asd',
-    photo: {}
-  })
+  return axios.get(`/blog/${id}`)
+    .then(({ data }) => data)
 }
