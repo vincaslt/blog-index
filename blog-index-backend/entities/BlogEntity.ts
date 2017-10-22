@@ -1,5 +1,6 @@
-import { Entity, PrimaryGeneratedColumn, Column, OneToOne, JoinColumn } from 'typeorm'
+import { Entity, PrimaryGeneratedColumn, Column, OneToOne, JoinColumn, OneToMany } from 'typeorm'
 import { PhotoEntity } from './PhotoEntity'
+import { RatingEntity } from './RatingEntity'
 
 @Entity()
 export class BlogEntity {
@@ -28,4 +29,7 @@ export class BlogEntity {
   @OneToOne((type) => PhotoEntity)
   @JoinColumn()
   public photo: PhotoEntity
+
+  @OneToMany((type) => RatingEntity, (rating) => rating.blog)
+  public ratings: RatingEntity[]
 }

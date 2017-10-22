@@ -43,12 +43,13 @@ export class BlogController {
       newBlog.title = request.body.title
       newBlog.photo = newPhoto
 
-      await BlogService.addBlog(newBlog)
-      return { status: 'ok'}
+      if (await BlogService.addBlog(newBlog)) {
+        return { status: 'ok'}
+      }
     } catch (e) {
       logger.error(e)
-      throw new BadRequestError('Blog could not be added')
     }
+    return new BadRequestError('Blog could not be added')
   }
 
   @Get('/blog/:id')
@@ -60,9 +61,9 @@ export class BlogController {
       }
     } catch (e) {
       logger.error(e)
-      throw new BadRequestError('Blog could not be received')
+      return new BadRequestError('Blog could not be received')
     }
-    throw new BadRequestError(`No blog found with id ${id}`)
+    return new BadRequestError(`No blog found with id ${id}`)
   }
 
 }
