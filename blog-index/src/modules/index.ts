@@ -1,15 +1,15 @@
 import { combineReducers } from 'redux'
 import { reducer as formReducer, FormStateMap } from 'redux-form'
-import { reducer as blogReducer, State as BlogState } from './blog'
+import { reducer as blogsReducer, State as BlogsState } from './blogs'
 
 interface State {
   form: FormStateMap
-  blog: BlogState
+  blogs: BlogsState
 }
 
 const reducers = combineReducers({
   form: formReducer,
-  blog: blogReducer
+  blogs: blogsReducer
 })
 
 export { State, reducers }
