@@ -3,7 +3,7 @@ import * as api from '../api/blog'
 import { models as m, actions, selectors } from '../modules/blogs'
 
 function* setActiveBlogSaga(action: m.SetActiveBlogAction) {
-  const activeBlog = yield select(selectors.activeBlog)
+  const activeBlog = yield select(selectors.activeBlogSelector)
   if (!activeBlog) {
     yield put(actions.requestInformation(action.id))
   }

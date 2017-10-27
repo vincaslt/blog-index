@@ -1,8 +1,9 @@
 import * as React from 'react'
 import { Rating, Popup, RatingProps } from 'semantic-ui-react'
 
-interface Props {
-  initialRating: number
+export interface Props {
+  onRate: (rating: number) => void,
+  initialRating?: number
   isSelected?: boolean
 }
 
@@ -24,7 +25,13 @@ class RatingInput extends React.Component<Props, State> {
   }
 
   handleRate = (event: React.SyntheticEvent<{}>, data: RatingProps) => {
-    this.setState({ selectedRating: data.rating as number })
+    const newRating = data.rating as number | undefined
+    if (newRating) {
+      this.props.onRate(newRating)
+    } else {
+      console.log('TODO: remove')
+    }
+    this.setState({ selectedRating: newRating })
   }
 
   render() {

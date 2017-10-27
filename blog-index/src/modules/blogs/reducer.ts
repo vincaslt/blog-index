@@ -3,7 +3,7 @@ import * as m from './models'
 export interface State {
   currentlyActive?: number
   byId: {
-    [key: number]: m.BlogInformation
+    [blogId: number]: m.BlogInformation
   }
 }
 

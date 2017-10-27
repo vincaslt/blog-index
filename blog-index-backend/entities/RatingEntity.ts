@@ -1,14 +1,9 @@
-import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, Index } from 'typeorm'
+import { Entity, Column, PrimaryColumn, ManyToOne } from 'typeorm'
 import { BlogEntity } from './BlogEntity'
 
 @Entity()
-@Index('blog_rating_per_ip', ['ip', 'blog'], { unique: true })
 export class RatingEntity {
-
-  @PrimaryGeneratedColumn()
-  public id: number
-
-  @Column()
+  @PrimaryColumn()
   public ip: string
 
   @Column()
@@ -17,6 +12,6 @@ export class RatingEntity {
   @Column()
   public date: Date
 
-  @ManyToOne((type) => BlogEntity, (blog) => blog.ratings)
+  @ManyToOne((type) => BlogEntity, (blog) => blog.ratings, { primary: true })
   public blog: BlogEntity
 }

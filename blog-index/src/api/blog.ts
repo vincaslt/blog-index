@@ -18,3 +18,8 @@ export function getBlogInformation(id: number) {
   return axios.get(`/blog/${id}`)
     .then(({ data }) => data)
 }
+
+export function rateBlog(blogId: number, rating: number) {
+  return axios.post(`/rate`, { blogId, rating })
+    .then(({ data }) => data)
+}

@@ -4,7 +4,6 @@ import {
   UseBefore,
   Body,
   Post,
-  Param,
   Req
 } from 'routing-controllers'
 import { Request } from 'express'
@@ -21,10 +20,9 @@ interface RatingBody {
 @JsonController()
 export class RatingController {
 
-  @Post('/rate/:id')
+  @Post('/rate')
   @UseBefore(NoProxy)
   public async rateBlog(
-    @Param('id') id: number,
     @Body() data: RatingBody,
     @Req() request: Request
   ) {

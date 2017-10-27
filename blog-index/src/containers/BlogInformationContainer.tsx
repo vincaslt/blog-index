@@ -1,18 +1,22 @@
 import { connect } from 'react-redux'
 import { State as ReduxState } from '../modules'
-import { selectors } from '../modules/blogs'
+import { selectors as blogSelectors } from '../modules/blogs'
+import { selectors as ratingSelectors } from '../modules/ratings'
 import { BlogInformation, Props as BlogInformationProps } from '../components/BlogInformation'
 
+// FIXME: don't bind to active blog but generic blog id
 const mapStateToProps = (state: ReduxState): BlogInformationProps => {
-  const activeBlog = selectors.activeBlog(state)
+  const activeBlog = blogSelectors.activeBlogSelector(state)
   return activeBlog ? {
+    id: activeBlog.id,
     title: activeBlog.title,
     description: activeBlog.description,
     image: activeBlog.photo,
     link: activeBlog.link,
-    rating: 5, // TODO: rating
+    rating: ratingSelectors.ratingSelector(state, activeBlog.id) || 1, // TODO: rating
     tags: activeBlog.tags
   } : {
+    id: 0,
     title: '',
     description: '',
     image: '',

@@ -3,7 +3,7 @@ import styled, { StyledComponentClass } from 'styled-components'
 import {
   Segment, Image, Header, HeaderProps, Button, Icon, Popup
 } from 'semantic-ui-react'
-import { RatingInput } from '../RatingInput'
+import { BlogRatingInput } from '../../containers/BlogRatingInput'
 import { Tags } from './Tags'
 
 const Content = styled.div`
@@ -41,6 +41,7 @@ const Title = styled(Header)`
 
 
 export interface Props {
+  id: number
   title: string
   image: string
   rating: number
@@ -53,6 +54,7 @@ export interface Props {
 // TODO: connected rating
 // TODO: formalize, that image size is 1024x720 (720p)
 const BlogInformation = ({
+  id,
   image,
   title,
   rating,
@@ -80,7 +82,7 @@ const BlogInformation = ({
       <ScoreSection>
         <Icon color="yellow" size="big" name="star" />
         <Score key="score">{rating}</Score>
-        <RatingInput initialRating={rating} />
+        <BlogRatingInput blogId={id} />
         <Tags labels={tags} />
       </ScoreSection>
       <div>{description}</div>
