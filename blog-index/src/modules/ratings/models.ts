@@ -1,11 +1,12 @@
 export enum types {
-  RATE_BLOG = 'RATINGS/RATE_BLOG'
+  RATE_BLOG = 'RATINGS/RATE_BLOG',
+  UPDATE_RATING = 'RATINGS/UPDATE_RATING'
 }
 
 export interface BlogRating {
   blogId: number,
-  rating: number,
-  yourRating: number
+  rating?: number,
+  yourRating?: number
 }
 
 export interface RateBlogAction {
@@ -14,4 +15,12 @@ export interface RateBlogAction {
   rating: number
 }
 
+export interface UpdateRatingAction {
+  type: types.UPDATE_RATING,
+  blogId: number,
+  rating?: number
+  yourRating?: number
+}
+
 export type RatingsAction = RateBlogAction
+  | UpdateRatingAction

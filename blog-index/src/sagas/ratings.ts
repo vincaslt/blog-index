@@ -1,12 +1,14 @@
-import { takeLatest, call } from 'redux-saga/effects'
+import { takeLatest, call, put } from 'redux-saga/effects'
 import * as api from '../api/blog'
-import { models as m } from '../modules/ratings'
+import { models as m, actions } from '../modules/ratings'
 
 function* rateBlogSaga(action: m.RateBlogAction) {
   try {
-    yield call(api.rateBlog, action.blogId, action.rating)
-    // TODO: update blog's rating
-  } catch (e) { /* TODO: handle error */ }
+    const ratingDto: api.RatingDto = yield call(api.rateBlog, action.blogId, action.rating)
+    yield put(actions.updateRating(action.blogId, ratingDto.rating, action.rating))
+  } catch (e) { 
+    console.log('UNHANDLED ERROR: ', e.message)  
+  }
 }
 
 export const ratingSagas = [

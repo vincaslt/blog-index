@@ -1,19 +1,34 @@
 import { takeLatest, call, put, select } from 'redux-saga/effects'
 import * as api from '../api/blog'
-import { models as m, actions, selectors } from '../modules/blogs'
+import { models as m, actions as blogActions, selectors } from '../modules/blogs'
+import { actions as ratingActions } from '../modules/ratings'
 
 function* setActiveBlogSaga(action: m.SetActiveBlogAction) {
   const activeBlog = yield select(selectors.activeBlogSelector)
   if (!activeBlog) {
-    yield put(actions.requestInformation(action.id))
+    yield put(blogActions.requestInformation(action.id))
   }
 }
 
 function* requestInformationSaga(action: m.RequestInformationAction) {
   try {
-    const blog = yield call(api.getBlogInformation, action.id)
-    yield put(actions.receiveInformation(blog))
-  } catch (e) { /* TODO: handle error */ }
+    const blog: api.BlogDto = yield call(api.getBlogInformation, action.id)
+    yield put(blogActions.receiveInformation({
+      category: blog.category,
+      description: blog.description,
+      id: blog.id,
+      link: blog.link,
+      photo: blog.photo,
+      tagline: blog.tagline,
+      tags: blog.tags,
+      title: blog.title
+    }))
+    if (blog.rating) {
+      yield put(ratingActions.updateRating(blog.id, blog.rating, blog.yourRating))
+    }
+  } catch (e) {
+    console.log('UNHANDLED ERROR: ', e.message)  
+  }
 }
 
 export const blogSagas = [

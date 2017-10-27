@@ -13,7 +13,7 @@ const mapStateToProps = (state: ReduxState): BlogInformationProps => {
     description: activeBlog.description,
     image: activeBlog.photo,
     link: activeBlog.link,
-    rating: ratingSelectors.ratingSelector(state, activeBlog.id) || 1, // TODO: rating
+    rating: ratingSelectors.ratingSelector(state, activeBlog.id) || 0, // TODO: rating
     tags: activeBlog.tags
   } : {
     id: 0,
@@ -21,7 +21,7 @@ const mapStateToProps = (state: ReduxState): BlogInformationProps => {
     description: '',
     image: '',
     link: '',
-    rating: 5
+    rating: 0
   } /// TODO: loading
 }
 

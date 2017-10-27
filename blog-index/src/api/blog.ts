@@ -3,6 +3,24 @@ import { models as m } from '../modules/addBlogForm'
 
 // TODO: move urls and data structures to shared
 
+// TODO: reuse from BE, as shared
+export interface BlogDto {
+  id: number
+  title: string
+  category: string
+  link: string
+  yourRating?: number
+  rating?: number
+  tags?: string[]
+  tagline?: string
+  description: string
+  photo: string
+}
+
+export interface RatingDto {
+  rating?: number
+}
+
 const axios = axiosCreator.create({
   baseURL: 'http://localhost:3030'
 })
@@ -14,12 +32,12 @@ export function addBlog(data: m.FormModel) {
     .then(({ data }) => data)
 }
 
-export function getBlogInformation(id: number) {
+export function getBlogInformation(id: number): Promise<BlogDto> {
   return axios.get(`/blog/${id}`)
     .then(({ data }) => data)
 }
 
-export function rateBlog(blogId: number, rating: number) {
+export function rateBlog(blogId: number, rating: number): Promise<RatingDto> {
   return axios.post(`/rate`, { blogId, rating })
     .then(({ data }) => data)
 }

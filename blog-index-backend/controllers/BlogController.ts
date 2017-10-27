@@ -8,12 +8,14 @@ import {
   Param
 } from 'routing-controllers'
 import { BlogService } from '../services/BlogService'
+import { RatingService } from '../services/RatingService'
 import { Request } from 'express'
 import * as multer from 'multer'
 import { BlogEntity } from '../entities/BlogEntity'
 import { PhotoEntity } from '../entities/PhotoEntity'
 import { logger } from '../utils/logger'
 import { FormFieldsDto } from '../dto/FormFieldsDto'
+import { BlogDto } from '../dto/BlogDto'
 import { config } from '../config'
 
 const upload = multer({ dest: config.PHOTO_DEST })
@@ -56,8 +58,21 @@ export class BlogController {
   public async blog( @Param('id') id: number) {
     try {
       const blog = await BlogService.getBlog(id)
+      const blogRating = await RatingService.getBlogRating(id)
+      const userRating = await RatingService.getUserRating(id)
       if (blog) {
-        return blog
+        return {
+          id: blog.id,
+          title: blog.title,
+          category: blog.category,
+          description: blog.description,
+          link: blog.link,
+          photo: blog.photo,
+          yourRating: userRating,
+          rating: blogRating,
+          tagline: blog.tagline,
+          tags: blog.tags
+        } as BlogDto
       }
     } catch (e) {
       logger.error(e)

@@ -37,7 +37,8 @@ export class RatingController {
       newRating.ip = request.connection.remoteAddress || 'unknown'
       newRating.rating = data.rating
       if (await RatingService.addRating(data.blogId, newRating)) {
-        return { status: 'ok' }
+        const rating = await RatingService.getBlogRating(data.blogId)
+        return { rating }
       }
     } catch (e) {
       logger.error(e)

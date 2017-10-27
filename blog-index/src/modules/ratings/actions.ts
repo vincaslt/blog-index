@@ -6,3 +6,11 @@ export const rateBlog =
     blogId,
     rating 
   })
+
+export const updateRating =
+  (blogId: number, rating?: number, yourRating?: number): m.UpdateRatingAction => ({
+    type: m.types.UPDATE_RATING,
+    blogId,
+    rating,
+    yourRating
+  })

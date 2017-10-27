@@ -24,6 +24,12 @@ class RatingInput extends React.Component<Props, State> {
     }
   }
 
+  componentWillReceiveProps(nextProps: Props) {
+    if (nextProps.isSelected) {
+      this.state = { selectedRating: nextProps.initialRating }
+    }
+  }
+
   handleRate = (event: React.SyntheticEvent<{}>, data: RatingProps) => {
     const newRating = data.rating as number | undefined
     if (newRating) {
