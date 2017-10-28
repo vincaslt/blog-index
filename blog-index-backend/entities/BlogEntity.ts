@@ -1,4 +1,5 @@
-import { Entity, PrimaryGeneratedColumn, Column, OneToOne, JoinColumn, OneToMany } from 'typeorm'
+import { Entity, PrimaryGeneratedColumn, Column, OneToOne, JoinColumn, OneToMany, ManyToOne } from 'typeorm'
+import { CategoryEntity } from './CategoryEntity'
 import { PhotoEntity } from './PhotoEntity'
 import { RatingEntity } from './RatingEntity'
 
@@ -11,8 +12,8 @@ export class BlogEntity {
   @Column()
   public title: string
   
-  @Column()
-  public category: string
+  @ManyToOne(() => CategoryEntity, (cat) => cat.blogs)
+  public category: CategoryEntity
   
   @Column()
   public link: string
@@ -26,10 +27,10 @@ export class BlogEntity {
   @Column()
   public description: string
 
-  @OneToOne((type) => PhotoEntity)
+  @OneToOne(() => PhotoEntity)
   @JoinColumn()
   public photo: PhotoEntity
 
-  @OneToMany((type) => RatingEntity, (rating) => rating.blog)
+  @OneToMany(() => RatingEntity, (rating) => rating.blog)
   public ratings: RatingEntity[]
 }

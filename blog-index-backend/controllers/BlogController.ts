@@ -30,6 +30,7 @@ export class BlogController {
   @Post('/blog')
   @UseBefore(upload.single('photo'))
   public async addBlog( @Req() request: FormRequest<FormFieldsDto>) {
+    const form = request.body
     try {
       const newPhoto = new PhotoEntity()
       newPhoto.mimetype = request.file.mimetype
@@ -37,15 +38,14 @@ export class BlogController {
       newPhoto.size = request.file.size
 
       const newBlog = new BlogEntity()
-      newBlog.category = request.body.category
-      newBlog.description = request.body.description
-      newBlog.link = request.body.link
-      newBlog.tagline = request.body.tagline
-      newBlog.tags = request.body.tags
-      newBlog.title = request.body.title
+      newBlog.description = form.description
+      newBlog.link = form.link
+      newBlog.tagline = form.tagline
+      newBlog.tags = form.tags
+      newBlog.title = form.title
       newBlog.photo = newPhoto
 
-      if (await BlogService.addBlog(newBlog)) {
+      if (await BlogService.addBlog(newBlog, form.categoryId)) {
         return { status: 'ok'}
       }
     } catch (e) {
@@ -64,7 +64,7 @@ export class BlogController {
         return {
           id: blog.id,
           title: blog.title,
-          category: blog.category,
+          categoryId: blog.category.id,
           description: blog.description,
           link: blog.link,
           photo: blog.photo,

@@ -12,6 +12,6 @@ export class RatingEntity {
   @Column()
   public date: Date
 
-  @ManyToOne((type) => BlogEntity, (blog) => blog.ratings, { primary: true })
+  @ManyToOne(() => BlogEntity, (blog) => blog.ratings, { primary: true })
   public blog: BlogEntity
 }

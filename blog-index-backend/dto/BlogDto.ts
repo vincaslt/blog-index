@@ -1,7 +1,7 @@
 export interface BlogDto {
   id: number
   title: string
-  category: string
+  categoryId: number
   link: string
   yourRating?: number
   rating?: number

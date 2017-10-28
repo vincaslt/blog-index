@@ -1,6 +1,6 @@
 export interface FormFieldsDto {
   title: string
-  category: string
+  categoryId: number
   link: string
   tags?: string[]
   tagline?: string
