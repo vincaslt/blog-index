@@ -5,13 +5,13 @@ import {
 } from 'routing-controllers'
 import { logger } from '../utils/logger'
 import { CategoryService } from '../services/CategoryService'
-import { CategoriesDto, CategoryDto } from '../dto/CategoryDto'
+import { CategoriesDto } from '../../common/dto/CategoryDto'
 
 @JsonController()
 export class CategoryController {
 
   @Get('/categories')
-  public async getSelectableCategories() {
+  public async getSelectableCategories(): Promise<CategoriesDto|Error> {
     try {
       const categories = await CategoryService.getCategories()
       return {
@@ -19,8 +19,8 @@ export class CategoryController {
           id: cat.id,
           name: cat.name,
           icon: cat.icon
-        } as CategoryDto))
-      } as CategoriesDto
+        }))
+      }
     } catch (e) {
       logger.error(e)
     }

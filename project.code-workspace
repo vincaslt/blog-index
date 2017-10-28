@@ -5,6 +5,9 @@
 		},
 		{
 			"path": "blog-index-backend"
+		},
+		{
+			"path": "common"
 		}
 	],
 	"settings": {}

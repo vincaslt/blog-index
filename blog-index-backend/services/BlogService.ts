@@ -1,9 +1,7 @@
 import * as jimp from 'jimp'
 import { Transaction, Repository, getRepository } from 'typeorm'
 import { TransactionRepository } from 'typeorm/decorator/transaction/TransactionRepository'
-import { BlogEntity } from '../entities/BlogEntity'
-import { PhotoEntity } from '../entities/PhotoEntity'
-import { CategoryEntity } from '../entities/index'
+import { PhotoEntity, BlogEntity, CategoryEntity } from '../entities/index'
 
 export class BlogService {
   @Transaction()
@@ -11,13 +9,12 @@ export class BlogService {
     blog: BlogEntity,
     categoryId: number,
     @TransactionRepository(BlogEntity) blogRepo?: Repository<BlogEntity>,
-    @TransactionRepository(PhotoEntity) photoRepo?: Repository<PhotoEntity>,
-    @TransactionRepository(CategoryEntity) categoryRepo?: Repository<CategoryEntity>
+    @TransactionRepository(PhotoEntity) photoRepo?: Repository<PhotoEntity>
   ) {
-    if (!blogRepo || !photoRepo || !categoryRepo) {
+    if (!blogRepo || !photoRepo) {
       throw new Error('Cannot inject repositories')
     }
-
+    const categoryRepo = getRepository(CategoryEntity)
     const category = await categoryRepo.findOneById(categoryId)
     if (category) {
       if (!category.selectable) {

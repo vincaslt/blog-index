@@ -14,8 +14,8 @@ import * as multer from 'multer'
 import { BlogEntity } from '../entities/BlogEntity'
 import { PhotoEntity } from '../entities/PhotoEntity'
 import { logger } from '../utils/logger'
-import { FormFieldsDto } from '../dto/FormFieldsDto'
-import { BlogDto } from '../dto/BlogDto'
+import { FormFieldsDto } from '../../common/dto/FormFieldsDto'
+import { BlogDto } from '../../common/dto/BlogDto'
 import { config } from '../config'
 
 const upload = multer({ dest: config.PHOTO_DEST })
@@ -45,7 +45,7 @@ export class BlogController {
       newBlog.title = form.title
       newBlog.photo = newPhoto
 
-      if (await BlogService.addBlog(newBlog, form.categoryId)) {
+      if (await BlogService.addBlog(newBlog, Number(form.categoryId))) {
         return { status: 'ok'}
       }
     } catch (e) {
@@ -55,7 +55,7 @@ export class BlogController {
   }
 
   @Get('/blog/:id')
-  public async blog( @Param('id') id: number) {
+  public async blog( @Param('id') id: number): Promise<BlogDto|Error> {
     try {
       const blog = await BlogService.getBlog(id)
       const blogRating = await RatingService.getBlogRating(id)
@@ -72,7 +72,7 @@ export class BlogController {
           rating: blogRating,
           tagline: blog.tagline,
           tags: blog.tags
-        } as BlogDto
+        }
       }
     } catch (e) {
       logger.error(e)

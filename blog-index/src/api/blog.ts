@@ -1,31 +1,13 @@
 import { default as axiosCreator } from 'axios'
-import { models as m } from '../modules/addBlogForm'
-
-// TODO: move urls and data structures to shared
-
-// TODO: reuse from BE, as shared
-export interface BlogDto {
-  id: number
-  title: string
-  category: string
-  link: string
-  yourRating?: number
-  rating?: number
-  tags?: string[]
-  tagline?: string
-  description: string
-  photo: string
-}
-
-export interface RatingDto {
-  rating?: number
-}
+import { BlogDto } from '../../../common/dto/BlogDto'
+import { RatingDto } from '../../../common/dto/RatingDto'
+import { FormFieldsDto } from '../../../common/dto/FormFieldsDto'
 
 const axios = axiosCreator.create({
   baseURL: 'http://localhost:3030'
 })
 
-export function addBlog(data: m.FormModel) {
+export function addBlog(data: FormFieldsDto): {} {
   const formData = new FormData()
   Object.entries(data).forEach(([k, v]) => formData.append(k, v))
   return axios.post('/blog', formData)

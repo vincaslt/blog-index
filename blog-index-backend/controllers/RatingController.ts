@@ -11,11 +11,7 @@ import { logger } from '../utils/logger'
 import { NoProxy } from '../middlewares/NoProxy'
 import { RatingEntity } from '../entities/RatingEntity'
 import { RatingService } from '../services/RatingService'
-
-interface RatingBody {
-  blogId: number
-  rating: number
-}
+import { RatingDto } from '../../common/dto/RatingDto'
 
 @JsonController()
 export class RatingController {
@@ -23,9 +19,9 @@ export class RatingController {
   @Post('/rate')
   @UseBefore(NoProxy)
   public async rateBlog(
-    @Body() data: RatingBody,
+    @Body() data: RatingDto,
     @Req() request: Request
-  ) {
+  ): Promise<RatingDto|Error> {
     // FIXME: only temporary, use class-validator to auto check
     if (data.rating === undefined) {
       return new BadRequestError('No rating specified')
@@ -38,7 +34,7 @@ export class RatingController {
       newRating.rating = data.rating
       if (await RatingService.addRating(data.blogId, newRating)) {
         const rating = await RatingService.getBlogRating(data.blogId)
-        return { rating }
+        return { blogId: data.blogId, rating }
       }
     } catch (e) {
       logger.error(e)

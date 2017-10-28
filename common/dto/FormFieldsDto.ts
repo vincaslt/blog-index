@@ -5,5 +5,5 @@ export interface FormFieldsDto {
   tags?: string[]
   tagline?: string
   description: string
-  photo: {}
+  photo: any
 }

@@ -1,4 +1,5 @@
 import * as m from './models'
+import { BlogDto } from '../../../../common/dto/BlogDto'
 
 export const setActiveBlog = 
   (id: number): m.SetActiveBlogAction => ({
@@ -13,7 +14,7 @@ export const requestInformation =
   })
 
 export const receiveInformation =
-  (blog: m.BlogInformation): m.ReceiveInformationAction => ({
+  (blog: BlogDto): m.ReceiveInformationAction => ({
     type: m.types.RECEIVE_INFORMATION,
     blog
   })

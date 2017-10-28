@@ -13,12 +13,10 @@ export interface Props {
 
 const BlogCategoryDropdown = ({ options, ...rest }: Props) => (
   <FormSelect
-    name="category"
     label="Category"
-    required
+    placeholder="Category"
     loading={!options}
     options={options}
-    placeholder="Category"
     {...rest}
   />
 )
@@ -32,6 +30,6 @@ const mapStateToProps = (state: ReduxState) => ({
   }]
 })
 
-const ConnectedBlogCategoryDropdown = connect(mapStateToProps)(BlogCategoryDropdown)
+const ConnectedBlogCategoryDropdown = connect(mapStateToProps, {})(BlogCategoryDropdown)
 
 export { ConnectedBlogCategoryDropdown as BlogCategoryDropdown }
