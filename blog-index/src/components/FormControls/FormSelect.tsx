@@ -1,8 +1,7 @@
 import * as React from 'react'
 import { Form, FormSelectProps } from 'semantic-ui-react'
-import { WrappedFieldProps } from 'redux-form'
 
-type Props = WrappedFieldProps<{}> & FormSelectProps
+type Props = FormSelectProps
 
 const FormSelect = ({ onChange, input, ...rest }: Props) => (
   input ? (

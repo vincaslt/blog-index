@@ -7,14 +7,8 @@ import { models as m, actions } from '../../modules/addBlogForm'
 import { ImageDropzone } from '../../components/ImageDropzone'
 import { FormDropdown } from '../../components/FormControls/FormDropdown'
 import { FormTextArea } from '../../components/FormControls/FormTextArea'
-import { FormSelect } from '../../components/FormControls/FormSelect'
 import { FormPhoto } from '../../components/FormControls/FormPhoto'
-
-const options = [
-  { key: 'ls', text: 'Lifestyle', value: 'lifestyle' },
-  { key: 'pg', text: 'Coding', value: 'female' },
-  { key: 'tr', text: 'Travel', value: 'female' }
-]
+import { BlogCategoryDropdown } from '../../containers/BlogCategoryDropdown'
 
 const tagOptions = [
   { key: 'pg', text: 'Programming', value: 'programming' },
@@ -66,14 +60,7 @@ class AddBlogPage extends React.Component<Props, {}> {
           <MainFormContainer>
             <Form.Group widths="equal">
               <Field component={Form.Input} name="title" label="Title" required placeholder="Title" />
-              <Field
-                component={FormSelect}
-                name="category"
-                label="Category"
-                required
-                options={options}
-                placeholder="Category"
-              />
+              <Field component={BlogCategoryDropdown} />
             </Form.Group>
             <Form.Group widths="equal">
               <Field
