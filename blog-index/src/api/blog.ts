@@ -1,11 +1,7 @@
-import { default as axiosCreator } from 'axios'
+import { axios } from '../utils/apiUtils'
 import { BlogDto } from '../../../common/dto/BlogDto'
 import { RatingDto } from '../../../common/dto/RatingDto'
 import { FormFieldsDto } from '../../../common/dto/FormFieldsDto'
-
-const axios = axiosCreator.create({
-  baseURL: 'http://localhost:3030'
-})
 
 export function addBlog(data: FormFieldsDto): {} {
   const formData = new FormData()

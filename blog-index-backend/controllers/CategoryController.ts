@@ -14,13 +14,11 @@ export class CategoryController {
   public async getSelectableCategories(): Promise<CategoriesDto|Error> {
     try {
       const categories = await CategoryService.getCategories()
-      return {
-        categories: categories.map((cat) => ({
-          id: cat.id,
-          name: cat.name,
-          icon: cat.icon
-        }))
-      }
+      return categories.map((cat) => ({
+        id: cat.id,
+        name: cat.name,
+        icon: cat.icon
+      }))
     } catch (e) {
       logger.error(e)
     }

@@ -11,7 +11,7 @@ export const initialState: State = {
   byId: {}
 }
 
-export const reducer = (state: State = initialState, action: m.BlogAction) => {
+export const reducer = (state: State = initialState, action: m.BlogAction): State => {
   switch (action.type) {
     case m.types.SET_ACTIVE:
       return {

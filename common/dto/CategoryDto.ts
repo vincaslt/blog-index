@@ -4,6 +4,4 @@ export interface CategoryDto {
   icon: string
 }
 
-export interface CategoriesDto {
-  categories: CategoryDto[]
-}
+export type CategoriesDto = CategoryDto[]

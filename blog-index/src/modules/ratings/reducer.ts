@@ -12,7 +12,7 @@ export const initialState: State = {
 }
 
 // TODO: decide if Ramda is better than typesafe approach with plain JS but more verbose
-export const reducer = (state: State = initialState, action: m.RatingsAction) => {
+export const reducer = (state: State = initialState, action: m.RatingsAction): State => {
   switch (action.type) {
     case m.types.RATE_BLOG:
       return R.assocPath(['byId', action.blogId, 'yourRating'], action.rating, state)
