@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { Form, FormSelectProps } from 'semantic-ui-react'
 
-type Props = FormSelectProps
+export type Props = FormSelectProps
 
 const FormSelect = ({ onChange, input, ...rest }: Props) => (
   input ? (

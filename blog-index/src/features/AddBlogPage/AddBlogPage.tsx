@@ -60,7 +60,7 @@ class AddBlogPage extends React.Component<Props, {}> {
           <MainFormContainer>
             <Form.Group widths="equal">
               <Field component={Form.Input} name="title" label="Title" required placeholder="Title" />
-              <Field name="categoryId" required component={BlogCategoryDropdown} />
+              <Field name="categoryId" required component={BlogCategoryDropdown} formElement />
             </Form.Group>
             <Form.Group widths="equal">
               <Field
