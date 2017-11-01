@@ -39,7 +39,7 @@ export class SearchController {
     } catch (e) {
       logger.error(e)
     }
-    return new BadRequestError('Categories could not be received')
+    return new BadRequestError('Search results could not be received')
   }
 
 }

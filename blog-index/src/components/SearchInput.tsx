@@ -2,7 +2,7 @@ import * as React from 'react'
 import { Input } from 'semantic-ui-react'
 
 export interface Props {
-  onSearch: (searchText: string) => void,
+  onSearch: (searchText: string) => any,
   secondary?: boolean,
 }
 

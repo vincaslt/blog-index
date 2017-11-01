@@ -1,32 +1,16 @@
-import * as React from 'react'
 import { connect } from 'react-redux'
-import { push } from 'connected-react-router'
-import { routeNames } from '../constants/routeNames'
-import { SearchInput, Props as SearchInputProps } from '../components/SearchInput'
+import { SearchInput } from '../components/SearchInput'
+import { actions } from '../modules/search'
 
 interface DispatchProps {
-  push: typeof push
-  onSearch?: (searchText: string) => void,
-}
-
-type Props = SearchInputProps & DispatchProps
-
-class SearchInputContainer extends React.Component<Props> {
-  handleSearch = (searchText: string) => {
-    this.props.push(routeNames.searchResults.url(searchText))
-  }
-
-  render() {
-    const { push, onSearch, ...rest } = this.props
-    return <SearchInput onSearch={this.handleSearch} {...rest} />
-  }
+  onSearch: typeof actions.search
 }
 
 const mapDispatchToProps: DispatchProps = {
-  push
+  onSearch: actions.search
 }
 
-const ConnectedSearchInput = connect(null, mapDispatchToProps)(SearchInputContainer)
+const ConnectedSearchInput = connect(null, mapDispatchToProps)(SearchInput)
 
 export { ConnectedSearchInput as SearchInputContainer }
 
