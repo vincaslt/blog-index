@@ -58,7 +58,6 @@ export class BlogController {
   public async blog( @Param('id') id: number): Promise<BlogDto|Error> {
     try {
       const blog = await BlogService.getBlog(id)
-      const blogRating = await RatingService.getBlogRating(id)
       const userRating = await RatingService.getUserRating(id)
       if (blog) {
         return {
@@ -69,7 +68,7 @@ export class BlogController {
           link: blog.link,
           photo: blog.photo,
           yourRating: userRating,
-          rating: blogRating,
+          rating: blog.rating,
           tagline: blog.tagline,
           tags: blog.tags
         }

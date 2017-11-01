@@ -26,7 +26,7 @@ class RatingInput extends React.Component<Props, State> {
 
   componentWillReceiveProps(nextProps: Props) {
     if (nextProps.isSelected) {
-      this.state = { selectedRating: nextProps.initialRating }
+      this.setState({ selectedRating: nextProps.initialRating })
     }
   }
 

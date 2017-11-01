@@ -81,6 +81,7 @@ class AddBlogPage extends React.Component<Props, {}> {
                 multiple
                 search
                 selection
+                allowAdditions
                 options={tagOptions}
               />
             </Form.Group>

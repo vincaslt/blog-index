@@ -34,6 +34,7 @@ export class RatingService {
     }
   }
 
+  // TODO userId
   public static async getUserRating(blogId: number) {
     const ratingsRepository = getRepository(RatingEntity)
     const blogRepository = getRepository(BlogEntity)
