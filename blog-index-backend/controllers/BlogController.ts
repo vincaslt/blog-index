@@ -55,10 +55,10 @@ export class BlogController {
   }
 
   @Get('/blog/:id')
-  public async blog( @Param('id') id: number): Promise<BlogDto|Error> {
+  public async blog( @Param('id') id: number, @Req() request: Request): Promise<BlogDto|Error> {
     try {
       const blog = await BlogService.getBlog(id)
-      const userRating = await RatingService.getUserRating(id)
+      const userRating = await RatingService.getUserRating(request.connection.remoteAddress || 'unknown', id)
       if (blog) {
         return {
           id: blog.id,
@@ -67,7 +67,7 @@ export class BlogController {
           description: blog.description,
           link: blog.link,
           photo: blog.photo,
-          yourRating: userRating,
+          yourRating: userRating ? userRating.rating : undefined,
           rating: blog.rating,
           tagline: blog.tagline,
           tags: blog.tags

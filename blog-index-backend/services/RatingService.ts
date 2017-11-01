@@ -34,14 +34,12 @@ export class RatingService {
     }
   }
 
-  // TODO userId
-  public static async getUserRating(blogId: number) {
+  public static async getUserRating(userIp: string, blogId: number) {
     const ratingsRepository = getRepository(RatingEntity)
     const blogRepository = getRepository(BlogEntity)
     const blog = await blogRepository.findOneById(blogId)
     if (blog) {
-      const ratings = await ratingsRepository.find({ where: { blog: blog.id } })
-      return ratings.reduce((sum, next) => sum + next.rating, 0) / ratings.length
+      return ratingsRepository.findOne({ where: { blog: blog.id, ip: userIp } })
     } else {
       throw new Error(`Blog with id: ${blogId} was not found`)
     }
