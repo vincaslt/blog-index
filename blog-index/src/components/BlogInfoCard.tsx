@@ -1,10 +1,10 @@
 import * as React from 'react'
 import { Link } from 'react-router-dom'
-import { routeNames } from '../../constants/routeNames'
+import { routeNames } from '../constants/routeNames'
 import styled, { StyledComponentClass } from 'styled-components'
 import { Image, ImageProps, Label, Header, HeaderProps } from 'semantic-ui-react'
-import { RatingPreview } from '../../components/RatingPreview' 
-import { colors } from '../../constants/colors'
+import { RatingPreview } from '../components/RatingPreview'
+import { colors } from '../constants/colors'
 import * as blogImage from './envato-bg.png'
 
 const Container = styled.div`
@@ -40,21 +40,26 @@ const Extras = styled.div`
   justify-content: space-between;
 `
 
-const Title = styled(Header)`
+const Title = styled(Header) `
   margin: 0 1rem 0 0 !important;
   a {
     color: ${colors.font} !important;
   }
 ` as StyledComponentClass<HeaderProps, {}>
 
-const BlogImage = styled(Image)`
+const BlogImage = styled(Image) `
   height: 10rem;
   img {
     height: 100% !important;
   }
 ` as StyledComponentClass<ImageProps, {}>
 
-const BlogResult = () => (
+interface Props {
+  id: number
+  title: string
+}
+
+const BlogInfoCard = ({ id, title }: Props) => (
   <Container>
     <Link to={routeNames.blog.url(10)}>
       <BlogImage
@@ -65,8 +70,8 @@ const BlogResult = () => (
     <ContentContainer>
       <Heading>
         <Title as="h3">
-          <Link to={routeNames.blog.url(10)}>
-            Envato Tuts+
+          <Link to={routeNames.blog.url(id)}>
+            {title}
           </Link>
           <Header.Subheader>
             Tutorials, Programming, Multiple Authors
@@ -89,4 +94,4 @@ const BlogResult = () => (
   </Container>
 )
 
-export { BlogResult }
+export { BlogInfoCard }

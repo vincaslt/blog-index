@@ -14,7 +14,7 @@ export const reducer = (state: State = initialState, action: m.SearchAction): St
   switch (action.type) {
     case m.types.RECEIVE_RESULTS:
       // TODO: pagination
-      return R.assoc('resultsByPage', action.resultBlogIds, state)
+      return R.assocPath(['resultsByPage', 0], action.resultBlogIds, state)
     default:
       return state
   }
