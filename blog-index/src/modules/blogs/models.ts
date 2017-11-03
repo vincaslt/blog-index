@@ -20,7 +20,7 @@ export interface RequestInformationAction {
 
 export interface ReceiveInformationAction {
   type: types.RECEIVE_INFORMATION,
-  blog: BlogDto
+  blogs: BlogDto[]
 }
 
 export type BlogAction = RequestInformationAction

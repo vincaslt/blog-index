@@ -15,7 +15,7 @@ export class SearchController {
   @Get('/search')
   public async search(
     @QueryParam('query') query: string,
-    @QueryParam('start') start: number
+    @QueryParam('start') start: number = 0
   ): Promise<SearchResultDto|Error> {
     try {
       const [resultEntities, total] = await SearchService.searchByTitleOrTags(query, start, start + 10)

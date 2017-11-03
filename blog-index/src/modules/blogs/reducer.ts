@@ -1,4 +1,5 @@
 import * as m from './models'
+import * as R from 'ramda'
 
 export interface State {
   currentlyActive?: number
@@ -14,18 +15,11 @@ export const initialState: State = {
 export const reducer = (state: State = initialState, action: m.BlogAction): State => {
   switch (action.type) {
     case m.types.SET_ACTIVE:
-      return {
-        ...state,
-        currentlyActive: action.id
-      }
+      return R.assoc('currentlyActive', action.id, state)
     case m.types.RECEIVE_INFORMATION:
-      return {
-        ...state,
-        byId: {
-          ...state.byId,
-          [action.blog.id]: action.blog
-        }
-      }
+      return action.blogs.reduce((prevState, blog) => (
+        R.assocPath(['byId', blog.id], blog, prevState)
+      ), state)
     default:
       return state
   }

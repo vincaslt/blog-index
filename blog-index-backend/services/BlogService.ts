@@ -34,7 +34,9 @@ export class BlogService {
 
   public static async getBlogs(ids: number[]) {
     const blogRepo = getRepository(BlogEntity)
-    const blogs = await blogRepo.findByIds(ids, { relations: ['photo', 'category'] })
+    const blogs = ids.length > 0
+      ? await blogRepo.findByIds(ids, { relations: ['photo', 'category'] })
+      : []
     return Promise.all(blogs.map(async (blog) => {
       const rating = await RatingService.getBlogRating(blog.id)
       const photoFile = await jimp.read(blog.photo.path)

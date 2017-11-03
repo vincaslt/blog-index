@@ -14,7 +14,7 @@ function* setActiveBlogSaga(action: m.SetActiveBlogAction) {
 function* requestInformationSaga(action: m.RequestInformationAction) {
   try {
     const blog: BlogDto = yield call(api.getBlogInformation, action.id)
-    yield put(blogActions.receiveInformation(blog))
+    yield put(blogActions.receiveInformation([blog]))
     if (blog.rating) {
       yield put(ratingActions.updateRating(blog.id, blog.rating, blog.yourRating))
     }

@@ -7,7 +7,7 @@ export const search =
   })
 
 export const receiveSearchResults =
-  (response: m.SearchResults): m.ReceiveSearchResultsAction => ({
+  (resultBlogIds: number[]): m.ReceiveSearchResultsAction => ({
     type: m.types.RECEIVE_RESULTS,
-    response
+    resultBlogIds
   })

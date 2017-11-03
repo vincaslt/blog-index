@@ -14,7 +14,8 @@ export interface SearchBlogsAction {
 
 export interface ReceiveSearchResultsAction {
   type: types.RECEIVE_RESULTS,
-  response: SearchResultDto
+  resultBlogIds: number[]
+  // TODO: pagination - total, start
 }
 
 export type SearchAction = SearchBlogsAction

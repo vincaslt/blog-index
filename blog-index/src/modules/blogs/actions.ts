@@ -14,7 +14,7 @@ export const requestInformation =
   })
 
 export const receiveInformation =
-  (blog: BlogDto): m.ReceiveInformationAction => ({
+  (blogs: BlogDto[]): m.ReceiveInformationAction => ({
     type: m.types.RECEIVE_INFORMATION,
-    blog
+    blogs
   })
