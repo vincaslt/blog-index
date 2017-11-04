@@ -8,6 +8,7 @@ import { logger } from '../utils/logger'
 import { SearchService } from '../services/SearchService'
 import { BlogService } from '../services/BlogService'
 import { SearchResultDto } from '../../common/dto/SearchResultDto'
+import { config } from '../config'
 
 @JsonController()
 export class SearchController {
@@ -26,7 +27,7 @@ export class SearchController {
           categoryId: blog.category.id,
           description: blog.description,
           link: blog.link,
-          photo: blog.photo,
+        photo: `${config.IMAGES_URL}/${blog.photo}`,
           rating: blog.rating,
           tagline: blog.tagline,
           tags: blog.tags

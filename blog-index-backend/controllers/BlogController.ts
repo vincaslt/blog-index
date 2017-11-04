@@ -9,16 +9,15 @@ import {
 } from 'routing-controllers'
 import { BlogService } from '../services/BlogService'
 import { RatingService } from '../services/RatingService'
+import { PhotoService } from '../services/PhotoService'
 import { Request } from 'express'
 import * as multer from 'multer'
 import { BlogEntity } from '../entities/BlogEntity'
-import { PhotoEntity } from '../entities/PhotoEntity'
 import { logger } from '../utils/logger'
 import { FormFieldsDto } from '../../common/dto/FormFieldsDto'
 import { BlogDto } from '../../common/dto/BlogDto'
 import { config } from '../config'
 
-const upload = multer({ dest: config.PHOTO_DEST })
 
 interface FormRequest<Fields> extends Request {
   body: Fields
@@ -28,14 +27,11 @@ interface FormRequest<Fields> extends Request {
 export class BlogController {
 
   @Post('/blog')
-  @UseBefore(upload.single('photo'))
+  @UseBefore(multer().single('photo'))
   public async addBlog( @Req() request: FormRequest<FormFieldsDto>) {
     const form = request.body
     try {
-      const newPhoto = new PhotoEntity()
-      newPhoto.mimetype = request.file.mimetype
-      newPhoto.path = request.file.path
-      newPhoto.size = request.file.size
+      const { filename } = await PhotoService.savePhoto(request.file.buffer, request.file.mimetype)
 
       const newBlog = new BlogEntity()
       newBlog.description = form.description
@@ -43,7 +39,7 @@ export class BlogController {
       newBlog.tagline = form.tagline
       newBlog.tags = form.tags
       newBlog.title = form.title
-      newBlog.photo = newPhoto
+      newBlog.photo = filename
 
       if (await BlogService.addBlog(newBlog, Number(form.categoryId))) {
         return { status: 'ok'}
@@ -66,7 +62,7 @@ export class BlogController {
           categoryId: blog.category.id,
           description: blog.description,
           link: blog.link,
-          photo: blog.photo,
+          photo: `${config.IMAGES_URL}/${blog.photo}`,
           yourRating: userRating ? userRating.rating : undefined,
           rating: blog.rating,
           tagline: blog.tagline,

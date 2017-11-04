@@ -67,7 +67,7 @@ const BlogInfoCard = ({ id, title, rating, shortDescription, photo, tags = []}: 
     <Link to={routeNames.blog.url(id)}>
       <BlogImage
         label={{ as: 'span', content: 'New', ribbon: true }}
-        src={`data:image/png;base64,${photo}`}
+        src={photo}
       />
     </Link>
     <ContentContainer>

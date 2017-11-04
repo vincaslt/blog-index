@@ -66,7 +66,7 @@ const BlogInformation = ({
   <Segment className={className} attached>
     <Image
       label={{ as: 'span', color: 'yellow', content: 'Featured', icon: 'empty star', ribbon: true }}
-      src={`data:image/png;base64,${image}`}
+      src={image}
       size="large"
     />
     <Content>
