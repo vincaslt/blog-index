@@ -13,6 +13,7 @@ interface StateProps {
   shortDescription: string
   photo: string
   rating?: number
+  tags?: string[]
 }
 
 type Props = OwnProps & StateProps
@@ -27,7 +28,8 @@ const mapStateToProps = (state: ReduxState, props: OwnProps): StateProps => {
     title: blog.title,
     rating: blog.rating,
     shortDescription: blog.tagline || blog.description,
-    photo: blog.photo
+    photo: blog.photo,
+    tags: blog.tags
   }
 }
 
