@@ -5,7 +5,6 @@ import styled, { StyledComponentClass } from 'styled-components'
 import { Image, ImageProps, Label, Header, HeaderProps } from 'semantic-ui-react'
 import { RatingPreview } from '../components/RatingPreview'
 import { colors } from '../constants/colors'
-import * as blogImage from './envato-bg.png'
 
 const Container = styled.div`
   margin: 1.5rem 0;
@@ -54,17 +53,21 @@ const BlogImage = styled(Image) `
   }
 ` as StyledComponentClass<ImageProps, {}>
 
-interface Props {
+export interface Props {
   id: number
   title: string
+  shortDescription: string
+  photo: string
+  rating?: number
+  tags?: string[]
 }
 
-const BlogInfoCard = ({ id, title }: Props) => (
+const BlogInfoCard = ({ id, title, rating, shortDescription, photo, tags = []}: Props) => (
   <Container>
-    <Link to={routeNames.blog.url(10)}>
+    <Link to={routeNames.blog.url(id)}>
       <BlogImage
         label={{ as: 'span', content: 'New', ribbon: true }}
-        src={blogImage}
+        src={`data:image/png;base64,${photo}`}
       />
     </Link>
     <ContentContainer>
@@ -74,14 +77,13 @@ const BlogInfoCard = ({ id, title }: Props) => (
             {title}
           </Link>
           <Header.Subheader>
-            Tutorials, Programming, Multiple Authors
+            {tags.join(', ')}
           </Header.Subheader>
         </Title>
-        <RatingPreview score={4.3} />
+        {rating ? <RatingPreview score={rating} /> : null}
       </Heading>
       <Content>
-        Some very short tagline taking at most one hundred
-        and fifteen text characters and taking up to three lines of text
+        {shortDescription}
       </Content>
       <Extras>
         <div>
