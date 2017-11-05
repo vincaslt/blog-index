@@ -6,6 +6,7 @@ import { BlogInfoCardContainer as BlogInfoCard } from '../../containers/BlogInfo
 import { BlogCategoryDropdown } from '../../containers/BlogCategoryDropdown'
 import { State as ReduxState } from '../../modules'
 import { selectors } from '../../modules/search'
+import { Pagination } from './Pagination'
 
 const sortOptions = [
   { key: 'rel', text: 'Relevance', value: 'relevance' },
@@ -28,6 +29,7 @@ type Props = StateProps
 
 const SearchResultsPage = ({ resultIds = [] }: Props) => {
   const results = resultIds.map((id) => <BlogInfoCard key={id} id={id} />)
+  const pagination = results.length  > 0 ? <Pagination /> : null
   return (
     <div>
       <FiltersContainer>
@@ -35,7 +37,7 @@ const SearchResultsPage = ({ resultIds = [] }: Props) => {
         <Select defaultValue={sortOptions[0].value} options={sortOptions} placeholder="Sort by" />
       </FiltersContainer>
       {results}
-      TODO pagination?
+      {pagination}
     </div>
   )
 }
