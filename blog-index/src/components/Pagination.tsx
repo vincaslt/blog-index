@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { Menu } from 'semantic-ui-react'
 
-interface Props {
+export interface Props {
   pages: number
   onSelect: (page: number) => any // page starting from 0
   activePage: number
