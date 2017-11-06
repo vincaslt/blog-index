@@ -1,6 +1,7 @@
 import * as React from 'react'
 import styled, { StyledComponentClass } from 'styled-components'
-import { Message, Segment, SegmentProps, Item, Menu, Button } from 'semantic-ui-react'
+import { Message, Segment, SegmentProps, Item } from 'semantic-ui-react'
+import { Pagination } from '../../components/Pagination'
 import { UserReview } from './UserReview'
 
 interface Props {
@@ -28,22 +29,11 @@ const UserReviews = ({ className }: Props) => (
         <UserReview score={4} />
       </Item.Group>
     </ReviewsContainer>
-    <Menu attached pagination>
-      <Menu.Item as={Button} name="1" active />
-      <Menu.Item as={Button} name="2" />
-      <Menu.Item as={Button} name="3" />
-      <Menu.Item disabled>...</Menu.Item>
-      <Menu.Item as={Button} name="8" />
-      <Menu.Item as={Button} name="9" />
-      <Menu.Item as={Button} name="10" />
-      <Menu.Item as={Button} name="11" />
-      <Menu.Item as={Button} name="12" />
-      <Menu.Menu position="right">
-        <Menu.Item>
-          <Button labelPosition="right" icon="pencil" content="Write a review" />
-        </Menu.Item>
-      </Menu.Menu>
-    </Menu>
+    <Pagination
+      onSelect={(page) => { console.log(page) }}
+      activePage={16}
+      pages={18}
+    />
   </div>
 )
 
