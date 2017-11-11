@@ -5,6 +5,7 @@ import * as api from '../api/categories'
 
 function* requestCategoriesSaga() {
   try {
+    console.log('asdasdasd')
     const categories: CategoriesDto = yield call(api.getCategories)
     yield put(actions.receiveCategories(categories))
   } catch (e) {

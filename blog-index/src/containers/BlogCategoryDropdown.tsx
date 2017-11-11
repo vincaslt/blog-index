@@ -18,9 +18,7 @@ type Props = DropdownProps & StateProps & DispatchProps
 
 class BlogCategoryDropdown extends React.Component<Props> {
   componentDidMount() {
-    if (this.props.options.length === 0) {
-      this.props.requestCategories()
-    }
+    this.props.requestCategories()
   }
 
   render() {

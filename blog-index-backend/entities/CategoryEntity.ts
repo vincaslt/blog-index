@@ -13,9 +13,6 @@ export class CategoryEntity {
   @Column()
   public icon: string
 
-  @Column()
-  public selectable: boolean
-
   @OneToMany(() => BlogEntity, (blog) => blog.category)
   public blogs: BlogEntity[]
 }

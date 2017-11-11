@@ -1,5 +1,5 @@
 import * as m from './models'
-import { entityIdMap } from '../../utils/reducerUtils'
+import * as R from 'ramda'
 
 export interface State {
   byId: {
@@ -16,10 +16,9 @@ export const reducer = (state: State = initialState, action: m.CategoryAction): 
     case m.types.REQUEST_CATEGORIES:
       return { ...state, byId: {} }
     case m.types.RECEIVE_CATEGORIES:
-      return {
-        ...state,
-        byId: entityIdMap(action.categories)
-      }
+      return action.categories.reduce((prevState, cat) => (
+        R.assocPath(['byId', cat.id], cat, prevState)
+      ), state)
     default:
       return state
   }

@@ -16,9 +16,6 @@ export class BlogService {
     const categoryRepo = getRepository(CategoryEntity)
     const category = await categoryRepo.findOneById(categoryId)
     if (category) {
-      if (!category.selectable) {
-        throw new Error(`Category ${categoryId} is unassignable`)
-      }
       blog.category = category
       return blogRepo.save(blog)
     }

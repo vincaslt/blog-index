@@ -1,7 +1,9 @@
+import { CategoryDto } from './CategoryDto'
+
 export interface BlogDto {
   id: number
   title: string
-  categoryId: number
+  category: CategoryDto
   link: string
   yourRating?: number
   rating?: number

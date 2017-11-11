@@ -6,19 +6,16 @@ import {
 import { logger } from '../utils/logger'
 import { CategoryService } from '../services/CategoryService'
 import { CategoriesDto } from '../../common/dto/CategoryDto'
+import { mapCategoryToDto } from '../utils/mappers'
 
 @JsonController()
 export class CategoryController {
 
   @Get('/categories')
-  public async getSelectableCategories(): Promise<CategoriesDto|Error> {
+  public async getCategories(): Promise<CategoriesDto|Error> {
     try {
       const categories = await CategoryService.getCategories()
-      return categories.map((cat) => ({
-        id: cat.id,
-        name: cat.name,
-        icon: cat.icon
-      }))
+      return categories.map(mapCategoryToDto)
     } catch (e) {
       logger.error(e)
     }

@@ -13,6 +13,7 @@ function* searchSaga(action: m.SearchBlogsAction) {
     yield put(blogActions.receiveInformation(response.results))
     const ids = response.results.map((blog) => blog.id)
     const prevQuery = yield select(searchSelectors.lastQuerySelector)
+    // If query is not the same as before, results in other pages will be cleared
     yield put(searchActions.receiveSearchResults(
       ids,
       response.start / 10 + 1,
@@ -27,6 +28,7 @@ function* searchSaga(action: m.SearchBlogsAction) {
 
 function* changeResultsPageSaga(action: m.ChangeResultsPageAction) {
   const lastQuery: string = yield select(searchSelectors.lastQuerySelector)
+  // No need to query if we already have the results cached
   const cachedResults: number[] | undefined | null = yield select(searchSelectors.searchResultsSelector, action.page)
   if (!cachedResults) {
     yield put(searchActions.search(lastQuery, action.page))

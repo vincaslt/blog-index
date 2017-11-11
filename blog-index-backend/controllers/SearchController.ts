@@ -8,6 +8,7 @@ import { logger } from '../utils/logger'
 import { SearchService } from '../services/SearchService'
 import { BlogService } from '../services/BlogService'
 import { SearchResultDto } from '../../common/dto/SearchResultDto'
+import { mapCategoryToDto } from '../utils/mappers'
 import { config } from '../config'
 
 @JsonController()
@@ -24,10 +25,10 @@ export class SearchController {
       const results = blogs.map((blog) => ({
           id: blog.id,
           title: blog.title,
-          categoryId: blog.category.id,
+          category: mapCategoryToDto(blog.category),
           description: blog.description,
           link: blog.link,
-        photo: `${config.IMAGES_URL}/${blog.photo}`,
+          photo: `${config.IMAGES_URL}/${blog.photo}`,
           rating: blog.rating,
           tagline: blog.tagline,
           tags: blog.tags

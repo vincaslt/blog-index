@@ -1,6 +1,7 @@
 import { takeLatest, call, put, select } from 'redux-saga/effects'
 import { BlogDto } from '../../../common/dto/BlogDto'
 import { models as m, actions as blogActions, selectors } from '../modules/blogs'
+import { actions as categoryActions } from '../modules/categories'
 import { actions as ratingActions } from '../modules/ratings'
 import * as api from '../api/blog'
 
@@ -14,6 +15,7 @@ function* setActiveBlogSaga(action: m.SetActiveBlogAction) {
 function* requestInformationSaga(action: m.RequestInformationAction) {
   try {
     const blog: BlogDto = yield call(api.getBlogInformation, action.id)
+    yield put(categoryActions.receiveCategories([blog.category]))
     yield put(blogActions.receiveInformation([blog]))
     if (blog.rating) {
       yield put(ratingActions.updateRating(blog.id, blog.rating, blog.yourRating))

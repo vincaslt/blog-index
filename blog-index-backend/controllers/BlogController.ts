@@ -17,6 +17,7 @@ import { logger } from '../utils/logger'
 import { FormFieldsDto } from '../../common/dto/FormFieldsDto'
 import { BlogDto } from '../../common/dto/BlogDto'
 import { config } from '../config'
+import { mapCategoryToDto } from '../utils/mappers'
 
 
 interface FormRequest<Fields> extends Request {
@@ -59,7 +60,7 @@ export class BlogController {
         return {
           id: blog.id,
           title: blog.title,
-          categoryId: blog.category.id,
+          category: mapCategoryToDto(blog.category),
           description: blog.description,
           link: blog.link,
           photo: `${config.IMAGES_URL}/${blog.photo}`,
