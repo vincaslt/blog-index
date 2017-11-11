@@ -14,10 +14,17 @@ export const search =
   })
 
 export const receiveSearchResults =
-  (resultBlogIds: number[], page: number, total: number, lastQuery: string): m.ReceiveSearchResultsAction => ({
+  (
+    resultBlogIds: number[],
+    page: number,
+    total: number,
+    lastQuery: string,
+    clearResults: boolean
+  ): m.ReceiveSearchResultsAction => ({
     type: m.types.RECEIVE_RESULTS,
     resultBlogIds,
     page,
     total,
-    lastQuery
+    lastQuery,
+    clearResults
   })

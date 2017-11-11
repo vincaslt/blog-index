@@ -25,6 +25,7 @@ export interface ReceiveSearchResultsAction {
   page: number
   total: number
   lastQuery: string
+  clearResults: boolean
 }
 
 export type SearchAction = SearchBlogsAction

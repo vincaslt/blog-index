@@ -18,7 +18,10 @@ export const initialState: State = {
 export const reducer = (state: State = initialState, action: m.SearchAction): State => {
   switch (action.type) {
     case m.types.RECEIVE_RESULTS:
-      const newState = R.assocPath(['resultsByPage', action.page], action.resultBlogIds, state)
+      let newState = action.clearResults
+        ? R.assoc('resultsByPage', [], state)
+        : state
+      newState = R.assocPath(['resultsByPage', action.page], action.resultBlogIds, newState)
       return R.merge(newState, {
         total: action.total,
         activePage: action.page,

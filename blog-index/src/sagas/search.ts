@@ -6,18 +6,19 @@ import { models as m, actions as searchActions, selectors as searchSelectors } f
 import { actions as blogActions } from '../modules/blogs'
 import * as api from '../api/search'
 
-// TODO: return results as ids and request only needed blog information
 function* searchSaga(action: m.SearchBlogsAction) {
   try {
     yield put(push(routeNames.searchResults.url(action.query)))
     const response: SearchResultDto = yield call(api.search, action.query, (action.page - 1) * 10)
     yield put(blogActions.receiveInformation(response.results))
     const ids = response.results.map((blog) => blog.id)
+    const prevQuery = yield select(searchSelectors.lastQuerySelector)
     yield put(searchActions.receiveSearchResults(
       ids,
       response.start / 10 + 1,
       response.total,
-      action.query
+      action.query,
+      prevQuery !== action.query
     ))
   } catch (e) {
     console.log('UNHANDLED ERROR: ', e.message)
