@@ -20,6 +20,14 @@ export const reducer = (state: State = initialState, action: m.BlogAction): Stat
       return action.blogs.reduce((prevState, blog) => (
         R.assocPath(['byId', blog.id], blog, prevState)
       ), state)
+    case m.types.RATE_BLOG:
+      return R.assocPath(['byId', action.blogId, 'yourRating'], action.rating, state)
+    case m.types.UPDATE_RATING:
+      return R.assocPath(['byId', action.blogId], {
+        ...state.byId[action.blogId],
+        rating: action.rating,
+        yourRating: action.yourRating
+      }, state)
     default:
       return state
   }

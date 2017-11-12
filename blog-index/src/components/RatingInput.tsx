@@ -45,7 +45,7 @@ class RatingInput extends React.Component<Props, State> {
       <Rating
         key="rating"
         maxRating={5}
-        defaultRating={
+        rating={
           this.state.selectedRating ||
           this.props.initialRating
         }

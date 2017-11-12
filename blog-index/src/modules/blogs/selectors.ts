@@ -11,3 +11,13 @@ export const activeBlogSelector = createSelector(
   allBlogsSelector,
   (activeBlogId, allBlogs) => activeBlogId ? allBlogs[activeBlogId] : undefined
 )
+
+export const ratingSelector = createSelector(
+  blogByIdSelector,
+  (blog) => blog ? blog.rating : undefined
+)
+
+export const yourRatingSelector = createSelector(
+  blogByIdSelector,
+  (blog) => blog ? blog.yourRating : undefined
+)

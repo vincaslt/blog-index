@@ -1,7 +1,7 @@
 import { connect, Dispatch } from 'react-redux'
 import { RatingInput } from '../components/RatingInput'
 import { State as ReduxState } from '../modules'
-import { selectors, actions, models as m } from '../modules/ratings'
+import { selectors, actions, models as m } from '../modules/blogs'
 
 interface OwnProps {
   blogId: number
@@ -25,7 +25,7 @@ const mapStateToProps = (state: ReduxState, props: OwnProps): StateProps => {
   }
 }
 
-const mapDispatchToProps = (dispatch: Dispatch<m.RatingsAction>, ownProps: OwnProps): DispatchProps => ({
+const mapDispatchToProps = (dispatch: Dispatch<m.BlogAction>, ownProps: OwnProps): DispatchProps => ({
   onRate: (rating: number) => dispatch(actions.rateBlog(ownProps.blogId, rating))
 })
 
