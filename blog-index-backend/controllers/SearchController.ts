@@ -17,10 +17,16 @@ export class SearchController {
   @Get('/search')
   public async search(
     @QueryParam('query') query: string,
+    @QueryParam('category') categoryId: number,
     @QueryParam('start') start: number = 0
   ): Promise<SearchResultDto|Error> {
     try {
-      const [resultEntities, total] = await SearchService.searchByTitleOrTags(query, start, start + 10)
+      const [resultEntities, total] = await SearchService.searchByTitleOrTagsWithCategory(
+        query,
+        start,
+        start + 10,
+        categoryId
+      )
       const blogs = await BlogService.getBlogs(resultEntities.map(({ id }) => id))
       const results = blogs.map((blog) => ({
           id: blog.id,
