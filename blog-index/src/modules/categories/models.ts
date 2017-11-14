@@ -14,7 +14,9 @@ export interface RequestCategoriesAction {
 export interface ReceiveCategoriesAction {
   type: types.RECEIVE_CATEGORIES,
   categories: CategoriesDto
+  allLoaded: boolean
 }
 
-export type CategoryAction = RequestCategoriesAction
+export type CategoryAction =
+  | RequestCategoriesAction
   | ReceiveCategoriesAction

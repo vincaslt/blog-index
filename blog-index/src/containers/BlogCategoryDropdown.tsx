@@ -5,30 +5,38 @@ import { actions, selectors, models as m } from '../modules/categories'
 import { FormSelect } from '../components/FormControls/FormSelect'
 import { State as ReduxState } from '../modules'
 
+type OwnProps = {
+  clearable?: boolean
+} & DropdownProps
+
 interface StateProps {
   options: m.Category[],
   formElement?: boolean,
+  allLoaded?: boolean
 }
 
 interface DispatchProps {
   requestCategories: typeof actions.requestCategories
 }
 
-type Props = DropdownProps & StateProps & DispatchProps
+type Props = OwnProps & StateProps & DispatchProps
 
 class BlogCategoryDropdown extends React.Component<Props> {
   componentDidMount() {
-    this.props.requestCategories()
+    if (!this.props.allLoaded) {
+      this.props.requestCategories()
+    }
   }
 
   render() {
-    const { options, requestCategories, formElement, ...rest } = this.props
+    const { options, requestCategories, formElement, clearable, allLoaded, ...rest } = this.props
     const FormComponent = formElement ? FormSelect : Select
-    const opts = options.map((opt) => ({
+    const initialOptions = this.props.clearable ? [{ key: '', text: 'None' }] : []
+    const opts = [...initialOptions, ...options.map((opt) => ({
       key: opt.id,
       text: opt.name,
       value: opt.id
-    }))
+    }))]
 
     return (
       <FormComponent
@@ -42,14 +50,20 @@ class BlogCategoryDropdown extends React.Component<Props> {
   }
 } 
 
-const mapStateToProps = (state: ReduxState) => ({
-  options: selectors.categoriesSelector(state)
-})
+const mapStateToProps = (state: ReduxState): StateProps => {
+  return {
+    options: selectors.categoriesSelector(state),
+    allLoaded: selectors.allCategoriesLoadedSelector(state)
+  }
+}
 
 const mapDispatchToProps = {
   requestCategories: actions.requestCategories
 }
 
-const ConnectedBlogCategoryDropdown = connect(mapStateToProps, mapDispatchToProps)(BlogCategoryDropdown)
+const ConnectedBlogCategoryDropdown = connect<StateProps, DispatchProps, OwnProps>(
+  mapStateToProps,
+  mapDispatchToProps
+)(BlogCategoryDropdown)
 
 export { ConnectedBlogCategoryDropdown as BlogCategoryDropdown }

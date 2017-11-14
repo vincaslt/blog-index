@@ -8,7 +8,12 @@ const FormSelect = ({ onChange, input, ...rest }: Props) => (
     <Form.Select
       name={input.name}
       value={input.value}
-      onChange={(e, { value }) => { input.onChange(value, '', '') }}
+      onChange={(e, { value }) => {
+        input.onChange(value, '', '')
+        if (onChange) {
+          onChange(e, { value })
+        }
+      }}
       onFocus={input.onFocus}
       {...rest}
     />

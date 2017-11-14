@@ -7,7 +7,8 @@ export const requestCategories =
   })
 
 export const receiveCategories =
-  (categories: CategoriesDto): m.ReceiveCategoriesAction => ({
+  (categories: CategoriesDto, allLoaded: boolean = false): m.ReceiveCategoriesAction => ({
     type: m.types.RECEIVE_CATEGORIES,
-    categories
+    categories,
+    allLoaded
   })

@@ -38,7 +38,8 @@ export interface UpdateRatingAction {
   yourRating?: number
 }
 
-export type BlogAction = RequestInformationAction
+export type BlogAction =
+  | RequestInformationAction
   | ReceiveInformationAction
   | SetActiveBlogAction
   | RateBlogAction

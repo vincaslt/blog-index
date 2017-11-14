@@ -9,7 +9,12 @@ import * as api from '../api/search'
 function* searchSaga(action: m.SearchBlogsAction) {
   try {
     yield put(push(routeNames.searchResults.url(action.query)))
-    const response: SearchResultDto = yield call(api.search, action.query, (action.page - 1) * 10)
+    const response: SearchResultDto = yield call(
+      api.search,
+      action.query,
+      (action.page - 1) * 10,
+      action.categoryId
+    )
     yield put(blogActions.receiveInformation(response.results))
     const ids = response.results.map((blog) => blog.id)
     const prevQuery = yield select(searchSelectors.lastQuerySelector)
@@ -35,7 +40,13 @@ function* changeResultsPageSaga(action: m.ChangeResultsPageAction) {
   }
 }
 
+function* changeCategorySaga(action: m.ChangeCategoryAction) {
+  const lastQuery: string = yield select(searchSelectors.lastQuerySelector)
+  yield put(searchActions.search(lastQuery, undefined, action.categoryId))
+}
+
 export const searchSagas = [
   takeLatest(m.types.SEARCH, searchSaga),
-  takeLatest(m.types.CHANGE_RESULTS_PAGE, changeResultsPageSaga)
+  takeLatest(m.types.CHANGE_RESULTS_PAGE, changeResultsPageSaga),
+  takeLatest(m.types.CHANGE_CATEGORY, changeCategorySaga)
 ]

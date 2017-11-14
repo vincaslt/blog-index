@@ -7,10 +7,17 @@ export const changeResultsPage =
   })
 
 export const search =
-  (query: string, page: number = 1): m.SearchBlogsAction => ({
+  (query: string, page: number = 1, categoryId?: number): m.SearchBlogsAction => ({
     type: m.types.SEARCH,
     query,
-    page
+    page,
+    categoryId
+  })
+
+export const changeCategory =
+  (categoryId?: number): m.ChangeCategoryAction => ({
+    type: m.types.CHANGE_CATEGORY,
+    categoryId
   })
 
 export const receiveSearchResults =

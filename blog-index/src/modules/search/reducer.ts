@@ -6,6 +6,7 @@ export interface State {
   total: number
   resultsByPage: number[][]
   lastQuery: string
+  categoryId?: number
 }
 
 export const initialState: State = {
@@ -17,6 +18,10 @@ export const initialState: State = {
 
 export const reducer = (state: State = initialState, action: m.SearchAction): State => {
   switch (action.type) {
+    case m.types.SEARCH:
+      return { ...state, categoryId: action.categoryId }
+    case m.types.CHANGE_CATEGORY:
+      return { ...state, categoryId: action.categoryId, resultsByPage: [] }
     case m.types.RECEIVE_RESULTS:
       let newState = action.clearResults
         ? R.assoc('resultsByPage', [], state)

@@ -5,7 +5,8 @@ export type SearchResults = SearchResultDto
 export enum types {
   SEARCH = 'SEARCH/SEARCH',
   RECEIVE_RESULTS = 'SEARCH/RECEIVE_RESULTS',
-  CHANGE_RESULTS_PAGE = 'SEARCH/CHANGE_RESULTS_PAGE'
+  CHANGE_RESULTS_PAGE = 'SEARCH/CHANGE_RESULTS_PAGE',
+  CHANGE_CATEGORY = 'SEARCH/CHANGE_CATEGORY'
 }
 
 export interface ChangeResultsPageAction {
@@ -17,6 +18,7 @@ export interface SearchBlogsAction {
   type: types.SEARCH,
   query: string
   page: number
+  categoryId?: number
 }
 
 export interface ReceiveSearchResultsAction {
@@ -28,6 +30,13 @@ export interface ReceiveSearchResultsAction {
   clearResults: boolean
 }
 
-export type SearchAction = SearchBlogsAction
+export interface ChangeCategoryAction {
+  type: types.CHANGE_CATEGORY,
+  categoryId?: number
+}
+
+export type SearchAction = 
+  | SearchBlogsAction
   | ReceiveSearchResultsAction
   | ChangeResultsPageAction
+  | ChangeCategoryAction

@@ -5,7 +5,7 @@ export interface State {
   currentlyActive?: number
   byId: {
     [blogId: number]: m.BlogInformation
-  }
+  } | {}
 }
 
 export const initialState: State = {

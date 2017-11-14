@@ -5,9 +5,8 @@ import * as api from '../api/categories'
 
 function* requestCategoriesSaga() {
   try {
-    console.log('asdasdasd')
     const categories: CategoriesDto = yield call(api.getCategories)
-    yield put(actions.receiveCategories(categories))
+    yield put(actions.receiveCategories(categories, true))
   } catch (e) {
     console.log('UNHANDLED ERROR: ', e.message)
   }

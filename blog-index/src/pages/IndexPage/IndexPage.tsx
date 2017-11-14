@@ -45,7 +45,6 @@ class IndexPage extends React.Component<Props, {}> {
   }
 }
 
-
 const ConnectedIndexPage = withRouter(IndexPage)
 
 export { ConnectedIndexPage as IndexPage }

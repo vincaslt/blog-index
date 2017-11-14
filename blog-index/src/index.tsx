@@ -4,7 +4,7 @@ import { ConnectedRouter } from 'connected-react-router'
 import { Provider } from 'react-redux'
 import { injectGlobal } from 'styled-components'
 import { store, browserHistory } from './store'
-import { Application } from './features/Application'
+import { Application } from './pages/Application'
 import { colors } from './constants/colors'
 import 'core-js/es7'
 
