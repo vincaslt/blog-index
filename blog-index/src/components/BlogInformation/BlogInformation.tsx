@@ -47,6 +47,7 @@ export interface Props {
   rating: number
   link: string
   description: string
+  category: { icon: string, name: string }
   tags?: string[]
   className?: string
 }
@@ -60,12 +61,13 @@ const BlogInformation = ({
   rating,
   description,
   link,
+  category,
   tags = [],
   className
 }: Props) => (
   <Segment className={className} attached>
     <Image
-      label={{ as: 'span', color: 'yellow', content: 'Featured', icon: 'empty star', ribbon: true }}
+      label={{ as: 'span', content: category.name, icon: category.icon, ribbon: true }}
       src={image}
       size="large"
     />

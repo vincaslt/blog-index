@@ -32,8 +32,8 @@ const BlogCard = () => (
     </Card.Content>
     <Card.Content extra>
       <SpacedContent>
-        <Label icon="comments outline" detail="reviews" content="121" image basic/>
-        <Label icon="checkmark" content="Verified" color="teal" basic/>
+        <Label icon="travel" content="Travel" />
+        <Label icon="comments outline" detail="reviews" content="121" image />
       </SpacedContent>
     </Card.Content>
   </Card>

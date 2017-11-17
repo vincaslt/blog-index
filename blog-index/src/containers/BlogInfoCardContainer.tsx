@@ -14,6 +14,7 @@ interface StateProps {
   photo: string
   rating?: number
   tags?: string[]
+  category: { icon: string, name: string }
 }
 
 type Props = OwnProps & StateProps
@@ -24,16 +25,19 @@ const BlogInfoCardContainer = ({ ...rest }: Props) => (
 
 const mapStateToProps = (state: ReduxState, props: OwnProps): StateProps => {
   const blog = selectors.blogByIdSelector(state, props.id)
+  if (!blog) {
+    throw new Error(`Blog ${props.id} is undefined, but should have been`)
+  }
   return {
     title: blog.title,
     rating: blog.rating,
     shortDescription: blog.tagline || blog.description,
     photo: blog.photo,
-    tags: blog.tags
+    tags: blog.tags,
+    category: { icon: blog.category.icon, name: blog.category.name }
   }
 }
 
-export const ConnectedBlogInfoCard =
-  connect<StateProps, {}, OwnProps>(mapStateToProps)(BlogInfoCardContainer)
+export const ConnectedBlogInfoCard = connect(mapStateToProps)(BlogInfoCardContainer)
 
 export { ConnectedBlogInfoCard as BlogInfoCardContainer }

@@ -58,15 +58,15 @@ export interface Props {
   title: string
   shortDescription: string
   photo: string
+  category: { icon: string, name: string }
   rating?: number
   tags?: string[]
 }
 
-const BlogInfoCard = ({ id, title, rating, shortDescription, photo, tags = []}: Props) => (
+const BlogInfoCard = ({ id, title, rating, shortDescription, photo, category, tags = []}: Props) => (
   <Container>
     <Link to={routeNames.blog.url(id)}>
       <BlogImage
-        label={{ as: 'span', content: 'New', ribbon: true }}
         src={photo}
       />
     </Link>
@@ -87,10 +87,10 @@ const BlogInfoCard = ({ id, title, rating, shortDescription, photo, tags = []}: 
       </Content>
       <Extras>
         <div>
-          <Label icon="comments outline" detail="reviews" content="121" image basic />
-          <Label icon={{ name: 'comments', key: 'comments_icon' }} detail="comments" content="56" image basic />
+          <Label icon={category.icon} content={category.name} image />
+          <Label icon="comments outline" detail="reviews" content="121" image />
+          <Label icon={{ name: 'comments', key: 'comments_icon' }} detail="comments" content="56" image />
         </div>
-        <Label icon="checkmark" content="Verified" color="teal" basic />
       </Extras>
     </ContentContainer>
   </Container>
